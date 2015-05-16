@@ -1,4 +1,7 @@
-# /etc/network/interfaces
+# Location: /etc/network/
+# Edits:
+# Replace PUB.IP.IP.IP with the server public IP
+# Replace GET.IP.IP.IP with the server default getaway 
 
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
@@ -8,5 +11,8 @@ auto lo
 iface lo inet loopback
 
 # The primary network interface
-auto eth0
+auto eth0 eth0:1
 iface eth0 inet dhcp
+    address PUB.IP.IP.IP
+    netmask 255.255.255.0
+    geteway GET.IP.IP.IP 

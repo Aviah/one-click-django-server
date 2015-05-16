@@ -1,7 +1,11 @@
-# /etc/hosts
+# Location: /etc/
+# Edits:
+# Replace www.example.com with actual website domain
+# Replace PUB.IP.IP.IP with the server public IP
 
 127.0.0.1	localhost
-127.0.1.1	ubuntu
+127.0.1.1	www.example.com my-django-server
+PUB.IP.IP.IP     www.example.com
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     localhost ip6-localhost ip6-loopback
