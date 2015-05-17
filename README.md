@@ -46,7 +46,7 @@ A set of scripts to auto install a django website server on ubuntu machine
 ## Install
 ** Only after prep: text was replaced, id_rsa.pub was copied, SECRET_KEY changed **
 
-From the command line (replace PUB.IP.IP.IP with the actual VPS public IP):
+From the command line(replace PUB.IP.IP.IP with the actual VPS public IP):
 
 1. Tar the files :
     `you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server`
@@ -59,14 +59,18 @@ From the command line (replace PUB.IP.IP.IP with the actual VPS public IP):
     
 4. SSH to server:
     `you@dev-machine$ ssh root@PUB.IP.IP.IP`
-    
-5. Unpack:
+
+5. OS Update ("root@li1234" will show the actual label/hostname your VPS provider set for the new VPS):
+    `root@li1234# apt-get update`
+    `root@li1234# apt-get upgrade`
+        
+6. Unpack:
     `root@li1234# tar -zxvf setup.tar.gz; chown -R root:root one-click-django-server`
     
-6. Run setup:
+7. Run setup:
     `root@li1234# cd one-click-django-server; ./setup.sh`
     
-7. Reboot the server, and ssh:
+8. Reboot the server, and ssh:
 ```
     you@dev-machine$ ssh root@PUB.IP.IP.IP
     you@my-django-server$ echo "Hello Server"
