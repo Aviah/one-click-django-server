@@ -76,6 +76,8 @@ From the command line(replace PUB.IP.IP.IP with the actual VPS public IP):
     you@my-django-server$ echo "Hello Server"
 ```
 
-8. Edit your hosts file on dev machine, and add the django server, so you can:
+9. Add the django server to your local hosts file:
+    `you@dev-machine: sudo nano /etc/hosts`
 
-    `you@dev-machine: ssh my-django-server``
+10. Check: 
+    `you@dev-machine: ssh my-django-server`
