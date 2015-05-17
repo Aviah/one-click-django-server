@@ -1,7 +1,4 @@
 # Location: /etc/
-# Edits:
-# Replace www.example.com with actual website domain
-# Replace PUB.IP.IP.IP with the server public IP
 
 127.0.0.1	localhost
 127.0.1.1	www.example.com my-django-server
