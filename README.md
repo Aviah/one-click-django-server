@@ -9,10 +9,10 @@ A set of scripts to auto install a django website server on ubuntu machine
 1. Buy a domain!
 2. Setup a VPS (these scripts were tested on an Ubuntu 14.04 LTS Linode VPS)
 3. Set the domain DNS settings to your VPS provider DNS servers (follow the instructions of your domain registrar & VPS provider docs)
-4. Donwload the one-click-django-server files to your local machine (you don't need to clone a repo)
+4. Donwload the one-click-django-server files to your local machine (you don't need to clone a repository, just the files)
 5. Edit the files (see "Text to Replace"). 
-4. Copy and use your actual ssh public-key file (see "SSH Public Key")
-5. Change the django SECRET_KEY string (see "Change the django SECRET_KEY")
+6. Copy and use your actual ssh public-key file (see "SSH Public Key")
+7. Change the django SECRET_KEY string (see "Change the django SECRET_KEY")
 
 
 ### Text to Replace:
@@ -51,24 +51,27 @@ From the command line (replace PUB.IP.IP.IP with the actual VPS public IP):
 1. Tar the files :
     `you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server`
     
-2. Upload to server: 
+2. Backup known_hosts (in case you want to re-build the VPS and run everything again):
+    `you@dev-machine$ cp ~/.ssh/known_hosts known_hosts.bak`
+    
+3. Upload to server: 
     `you@dev-machine$ scp setup.tar.gz root@PUB.IP.IP.IP:~/`
     
-3. SSH to server:
+4. SSH to server:
     `you@dev-machine$ ssh root@PUB.IP.IP.IP`
     
-4. Unpack:
+5. Unpack:
     `root@li1234# tar -zxvf setup.tar.gz; chown -R root:root one-click-django-server`
     
-5. Run setup:
+6. Run setup:
     `root@li1234# cd one-click-django-server; ./setup.sh`
     
-6. Reboot the server, and ssh:
+7. Reboot the server, and ssh:
 ```
     you@dev-machine$ ssh root@PUB.IP.IP.IP
     you@my-django-server$ echo "Hello Server"
 ```
 
-7. Edit your hosts file on dev machine, and add the django server, so you can:
+8. Edit your hosts file on dev machine, and add the django server, so you can:
 
     `you@dev-machine: ssh my-django-server``
