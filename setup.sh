@@ -50,6 +50,16 @@ chmod -R g+r /home/django
 cp scripts/django_projects.pth /usr/lib/python2.7/dist-packages/
 
 
+# Webservers
+apt-get install nginx
+service nginx stop
+apt-get install apache2-mpm-worker libapache2-mod-wsgi
+cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
+cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.orig
+cp /etc/apache2/ports.conf /etc/apache2/ports.conf.orig
+
+
+
 
 
 
