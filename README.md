@@ -1,6 +1,9 @@
 # one-click-django-server
 A set of scripts to auto install a django website server on ubuntu machine
 
+## Intro
+Tutorial with a real site
+Http
 
 
 ## Prep:
@@ -18,12 +21,12 @@ A set of scripts to auto install a django website server on ubuntu machine
 ### Text to Replace:
 * Easiest way is to use a text editor that can run "replace all" on all files in a directory*
 
-1. Replace "PUB.IP.IP.IP" with actual VPS Public IP (files: etc/hosts, etc/interfaces)
-2. Replace ""GET.IP.IP.IP" with" actual VPS Getaway IP (files: etc/interfaces)
+1. Replace "PUB.IP.IP.IP" with the actual VPS Public IP (files: etc/hosts, etc/interfaces, etc/django-site-nginx)
+2. Replace ""GET.IP.IP.IP" with" the actual VPS Getaway IP (files: etc/interfaces)
 3. Replace "myusername" with your actual username (files: setup.sh)
-4. Replace "www.example.com" with your actual domain (file: /etc/hosts, site_repo/settings_production.py)
-5. Optional: Replace "my-django-server" with another hostname (files: /etc/hostname, etc/hosts)
-6. Optional: Replace "mysite" with your actual projectname (files: setup.sh, scripts/django_projects.pth)
+4. Replace "example.com" with your actual domain (files: etc/hosts, site_repo/settings_production.py, etc/django-site-apache, etc/django-site-nginx)
+5. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
+6. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/django-site-apache)
 
 
 ### SSH Public Key:

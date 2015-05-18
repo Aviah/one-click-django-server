@@ -11,10 +11,10 @@ cp /etc/network/interfaces /etc/network/interfaces.orig
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.orig
 
 # copy config files
-cp config/hostname /etc/
-cp config/hosts /etc/
-cp config/interfaces /etc/network/
-cp config/sshd_config /etc/ssh/
+cp etc/hostname /etc/
+cp etc/hosts /etc/
+cp etc/interfaces /etc/network/
+cp etc/sshd_config /etc/ssh/
 
 
 # add sudo user with ssh access
@@ -57,6 +57,18 @@ apt-get install apache2-mpm-worker libapache2-mod-wsgi
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.orig
 cp /etc/apache2/ports.conf /etc/apache2/ports.conf.orig
+cp etc/nginx.con /etc/nginx/
+cp etc/apache.conf etc/apache2/
+cp etc/ports.conf etc/apache2/
+cp etc/django-site-nginx /etc/nginx/sites-available/
+ln -s ../sites-available/django-site-nginx /etc/nginx/sites-enabled/django
+rm /etc/nginx/sites-enabled/default
+cp etc/django-site-apache /etc/apache2/sites-available/
+ln -s ../sites-available/django-site-apache /etc/apache2/sites-enabled/django
+rm /etc/nginx/sites-enabled/000-default.conf
+service nginx restart
+service apache2 restart
+
 
 
 
