@@ -14,8 +14,8 @@ Re build and try
 2. Setup a VPS (these scripts were tested on an Ubuntu 14.04 LTS Linode VPS)
 3. Set the domain DNS settings to your VPS provider DNS servers (follow the instructions of your domain registrar & VPS provider docs)
 4. Donwload the one-click-django-server files to your local machine (you don't need to clone a repository, just the files)
-5. Edit the files (see "Text to Replace"). 
-6. Copy and use your actual ssh public-key file (see "SSH Public Key")
+5. Use "find & replace" to change specific bits in the files (see "Text to Replace")
+6. Copy your actual ssh public-key file (see "SSH Public Key")
 7. Change the django SECRET_KEY string (see "Change the django SECRET_KEY")
 
 
@@ -27,8 +27,8 @@ Re build and try
 3. Replace "myusername" with your actual username (files: setup.sh)
 4. Replace "example.com" with your actual domain (files: etc/hosts, site_repo/settings_production.py, etc/django-site-apache, etc/django-site-nginx)
 5. Replace "djangomysqlpassword" with actual password. This is the password that django will use to access MySQL (files: site_repo/settings.py, scripts/django_user.sql)
-5. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
-6. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/django-site-apache)
+6. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
+7. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/django-site-apache)
 
 
 ### SSH Public Key:
@@ -75,14 +75,16 @@ From the command line(replace PUB.IP.IP.IP with the actual VPS public IP):
 7. Run setup:
     `root@li1234# cd one-click-django-server; ./setup.sh`
     
-8. Reboot the server, and ssh:
+8. Reboot the server. Check the website with a browser!
+
+9. Check SSH w/o password:
 ```
-    you@dev-machine$ ssh root@PUB.IP.IP.IP
+    you@dev-machine$ ssh PUB.IP.IP.IP
     you@my-django-server$ echo "Hello Server"
 ```
 
-9. Add the django server to your local hosts file:
+11. Add the django server to your local hosts file:
     `you@dev-machine: sudo nano /etc/hosts`
 
-10. Check: 
+12. Check: 
     `you@dev-machine: ssh my-django-server`
