@@ -35,6 +35,7 @@ pip install Django==1.8.1
 useradd django -m -g www-data
 mkdir /home/django/$SITEPROJECTNAME
 cp -r site_repo /home/django/$SITEPROJECTNAME/
+cp scripts/manage.py /home/django/$SITEPROJECTNAME/
 mkdir /home/django/$SITEPROJECTNAME/media_root
 mkdir /home/django/$SITEPROJECTNAME/static_root
 mkdir /home/django/$SITEPROJECTNAME/site_config
@@ -68,6 +69,28 @@ ln -s ../sites-available/django-site-apache /etc/apache2/sites-enabled/django
 rm /etc/nginx/sites-enabled/000-default.conf
 service nginx restart
 service apache2 restart
+
+# Database
+echo "During the follwing MySQL installation, you will be asked to enter the MySQL root password."
+echo "Select a strong password, and rememeber it, you will need it soon! (press any key to continue)"
+read dummy
+apt-get install mysql-server mysql-client
+echo "Running mysql_secure_installation. If the root password you just entered is strong, you don't need to change it"
+echo "For the rest of the options, select the defaults (press any key to continue)"
+read dummy
+mysql_secure_installation
+cp /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
+cp etc/my.cnf /etc/mysql/my.cnf
+service mysql restart
+echo "Use MySQL root password"
+mysql -uroot -p < scripts/db.sql
+echo "Use MySQL root password (again...)"
+mysql -uroot -p < scripts/django_user.sql
+django-admin migrate
+django-admin createsuperuser
+
+
+echo "Woohoo! Reboot the machine, if everything OK you should be able to visit the site in your browser"
 
 
 

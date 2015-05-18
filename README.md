@@ -4,6 +4,7 @@ A set of scripts to auto install a django website server on ubuntu machine
 ## Intro
 Tutorial with a real site
 Http
+Re build and try
 
 
 ## Prep:
@@ -19,12 +20,13 @@ Http
 
 
 ### Text to Replace:
-* Easiest way is to use a text editor that can run "replace all" on all files in a directory*
+* Easiest way, and recommended, is to use a text editor that can run "replace all" on all files in a directory. *
 
 1. Replace "PUB.IP.IP.IP" with the actual VPS Public IP (files: etc/hosts, etc/interfaces, etc/django-site-nginx)
 2. Replace ""GET.IP.IP.IP" with" the actual VPS Getaway IP (files: etc/interfaces)
 3. Replace "myusername" with your actual username (files: setup.sh)
 4. Replace "example.com" with your actual domain (files: etc/hosts, site_repo/settings_production.py, etc/django-site-apache, etc/django-site-nginx)
+5. Replace "djangomysqlpassword" with actual password. This is the password that django will use to access MySQL (files: site_repo/settings.py, scripts/django_user.sql)
 5. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
 6. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/django-site-apache)
 
