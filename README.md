@@ -11,12 +11,27 @@ Re build and try
 
 ### Overview:
 1. Buy a domain!
-2. Setup a VPS (these scripts were tested on an Ubuntu 14.04 LTS Linode VPS)
-3. Set the domain DNS settings to your VPS provider DNS servers (follow the instructions of your domain registrar & VPS provider docs)
-4. Donwload the one-click-django-server files to your local machine (you don't need to clone a repository, just the files)
-5. Use "find & replace" to change specific bits in the files (see "Text to Replace")
-6. Copy your actual ssh public-key file (see "SSH Public Key")
-7. Change the django SECRET_KEY string (see "Change the django SECRET_KEY")
+2. Setup a VPS (see "Setup a VPS")
+3. Donwload the one-click-django-server files to your local machine (you don't need to clone a repository, just the files)
+4. Use "find & replace" to change specific bits in the files (see "Text to Replace")
+5. Copy your actual ssh public-key file (see "SSH Public Key")
+6. Change the django SECRET_KEY string (see "Change the django SECRET_KEY")
+
+
+### Setup a VPS
+
+1. Sign up for a VPS. For a starter django site, the cheapest VPS is OK 
+2. Build the VPS OS with Ubuntu 14.04 LTS 
+3. Point the domain nameserver records on your domain registrar account to the VPS provider nameservers
+4. Add a DNS record for your domain & VPS 
+
+*Note: These scripts were tested on an Ubuntu 14.04 Linode 1GB VPS*
+If you sign-up with Linode:
+1. Build the VPS OS: "Rebuild", select Ubuntu 14.04 LTS & root password, then click "Rebuild"
+2. Set the domain nameserver on domain registrar account to ns1.linode.com, ns2.linode.com ... ns5.linode.com
+3. Add DNS record: Select "DNS Manager" >> "Add a domain zone" >> enter domain, enter email, select VPS, click "Add a master zone"
+
+If you use other VPS provider, see their docs, these steps should be fairly simple also.
 
 
 ### Text to Replace:
@@ -35,14 +50,17 @@ Re build and try
 
 1. From the command line:
 
-    `you@dev-machine$ cp ~/.ssh/id_rsa.pub /path/to/one-click-django-server/user/`
+    `you@dev-machine$ cp ~/.ssh/id_rsa.pub one-click-django-server/user/`
+
+2. Backup known_hosts (in case you want to re-build the VPS and run everything again):
+    `you@dev-machine$ cp ~/.ssh/known_hosts ~/.ssh/known_hosts.bak`
 
 
 ### Change the django SECRET_KEY:
 
 1. From the command line (replace "foobar" with a random long string):
 
-    `you@dev-machine$ python  /path/to/one-click-django-server/scripts/create_secret_key.py foobar`
+    `you@dev-machine$ python one-click-django-server/scripts/create_secret_key.py foobar`
     
 2. Copy the generated key, and paste it to the SECRET_KEY entry in /path/to/one-click-django-server/site_repo/settings.py
     
@@ -55,36 +73,35 @@ From the command line(replace PUB.IP.IP.IP with the actual VPS public IP):
 
 1. Tar the files :
     `you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server`
-    
-2. Backup known_hosts (in case you want to re-build the VPS and run everything again):
-    `you@dev-machine$ cp ~/.ssh/known_hosts known_hosts.bak`
-    
-3. Upload to server: 
+        
+2. Upload to server: 
     `you@dev-machine$ scp setup.tar.gz root@PUB.IP.IP.IP:~/`
     
-4. SSH to server:
+3. SSH to server:
     `you@dev-machine$ ssh root@PUB.IP.IP.IP`
 
-5. OS Update ("root@li1234" will show the actual label/hostname your VPS provider set for the new VPS):
+4. OS Update ("root@li1234" will show the actual label/hostname your VPS provider set for the new VPS):
     `root@li1234# apt-get update`
-    `root@li1234# apt-get upgrade`
         
-6. Unpack:
+4. Unpack:
     `root@li1234# tar -zxvf setup.tar.gz; chown -R root:root one-click-django-server`
     
-7. Run setup:
+6. Run setup:
     `root@li1234# cd one-click-django-server; ./setup.sh`
     
-8. Reboot the server. Check the website with a browser!
+7. Reboot the server. Check the website with a browser!
 
-9. Check SSH w/o password:
+8. Check SSH w/o password:
 ```
     you@dev-machine$ ssh PUB.IP.IP.IP
     you@my-django-server$ echo "Hello Server"
 ```
 
-11. Add the django server to your local hosts file:
+9. Add the django server to your local hosts file:
     `you@dev-machine: sudo nano /etc/hosts`
 
-12. Check: 
+10. Check: 
     `you@dev-machine: ssh my-django-server`
+
+11. OS Upgrade:
+    `root@li1234# sudo apt-get update`

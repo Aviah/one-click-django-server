@@ -71,12 +71,15 @@ service nginx restart
 service apache2 restart
 
 # Database
-echo "During the follwing MySQL installation, you will be asked to enter the MySQL root password."
-echo "Select a strong password, and rememeber it, you will need it soon! (press any key to continue)"
+
+echo; echo ">>> During the follwing MySQL installation, you will be asked to enter the MySQL root password."
+echo ">>> Select a strong password, and rememeber it, you will need it soon! (press any key to continue)"
+echo "[press any key to continue]"
 read dummy
 apt-get install mysql-server mysql-client
-echo "Running mysql_secure_installation. If the root password you just entered is strong, you don't need to change it"
-echo "For the rest of the options, select the defaults (press any key to continue)"
+echo; echo ">>> Running mysql_secure_installation. If the root password you just entered is strong, you don't need to change it"
+echo ">>>For the rest of the options, select the defaults"
+echo "[press any key to continue]"
 read dummy
 mysql_secure_installation
 cp /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
@@ -84,10 +87,8 @@ cp etc/my.cnf /etc/mysql/my.cnf
 service mysql restart
 echo "Use MySQL root password"
 mysql -uroot -p < scripts/db.sql
-echo "Use MySQL root password (again...)"
-mysql -uroot -p < scripts/django_user.sql
-django-admin migrate
-django-admin createsuperuser
+/home/django/mysite/manage.py migrate
+/home/django/mysite/manage.py createsuperuser
 
 
 echo "Woohoo! Reboot the machine, if everything OK you should be able to visit the site in your browser"
