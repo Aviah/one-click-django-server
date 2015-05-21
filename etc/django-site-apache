@@ -1,30 +1,21 @@
 #Locaction: /etc/apache2/sites-available/
 
 <VirtualHost *:8001>
-	
-	WSGIScriptAlias /home/django/mysite/site_repo/wsgi.py
-	DocumentRoot /home/django/mysite/site_repo
-	<Directory /home/django/mysite/site_repo>
-		Require all granted
-	</Directory>
-	ServerName www.example.com
-	
-	WSGIDaemonProcess django-wsgi user=django group=www-data processes=2 threads=2 display-name=mod-wsgi
-	WSGIProcessGroup django-wsgi
-	ServerAdmin webmaster@localhost
-	ServerSignature Off	
 
-	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-	# error, crit, alert, emerg.
-	# It is also possible to configure the loglevel for particular
-	# modules, e.g.
-	#LogLevel info ssl:warn
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
-	
-	
+    ServerName www.example.com
+    ServerAdmin webmaster@localhost
+    ServerSignature Off	
 
-	
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    # error, crit, alert, emerg.
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    #LogLevel info ssl:warn
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+
+
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet

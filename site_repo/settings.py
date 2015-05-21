@@ -16,9 +16,9 @@ from django.core.exceptions import ImproperlyConfigured
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT = "%s/media_root/"%os.path.dirname(BASE_DIR)
-STATIC_ROOT = "%s/static_root/"%os.path.dirname(BASE_DIR)
-TEMPLATE_DIRS = ("%s/templates/"%BASE_DIR,)
+MEDIA_ROOT = "%s/media_root/"%BASE_DIR
+STATIC_ROOT = "%s/static_root/"%BASE_DIR
+TEMPLATE_DIRS = ("%s/site_repo/templates"%BASE_DIR,)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -177,14 +177,14 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filters': ['require_debug_log_true'],
-            'filename': "%s/logs/debug.log"%os.path.dirname(BASE_DIR),
+            'filename': "%s/logs/debug.log"%BASE_DIR,
             'maxBytes': 1024*1024*5,
             'backupCount':7,
             },
         'main': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': "%s/logs/main.log"%os.path.dirname(BASE_DIR),
+            'filename': "%s/logs/main.log"%BASE_DIR,
             'maxBytes': 1024*1024*5,
             'backupCount':7,
             },
@@ -192,7 +192,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filters': ['require_debug_db_log_true'],
-            'filename': "%s/logs/debug_db.log"%os.path.dirname(BASE_DIR),
+            'filename': "%s/logs/debug_db.log"%BASE_DIR,
             'maxBytes': 1024*1024*5,
             'backupCount':7,
             },        
