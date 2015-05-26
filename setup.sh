@@ -43,7 +43,6 @@ mkdir /home/django/$SITEPROJECTNAME/static_root
 mkdir /home/django/$SITEPROJECTNAME/site_config
 touch /home/django/$SITEPROJECTNAME/site_config/__init__.py
 cp site_repo/settings_production.py /home/django/$SITEPROJECTNAME/site_config/
-touch site_config/settings_tmp.py
 touch /home/django/$SITEPROJECTNAME/site_config/settings_tmp.py
 mkdir /home/django/$SITEPROJECTNAME/logs
 touch /home/django/$SITEPROJECTNAME/logs/main.log
