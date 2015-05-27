@@ -18,7 +18,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = "%s/media_root/"%BASE_DIR
 STATIC_ROOT = "%s/static_root/"%BASE_DIR
-TEMPLATE_DIRS = ("%s/site_repo/templates"%BASE_DIR,)
+TEMPLATE_DIRS = ["%s/templates/"%os.path.dirname(os.path.abspath(__file__))]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'site_repo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': TEMPLATE_DIRS,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

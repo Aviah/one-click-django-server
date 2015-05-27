@@ -5,8 +5,8 @@ from django.shortcuts import render
 def home_page(request):
     
     template = 'home_page.html'
-    context = {'browser_title':'Hello!',
-               'page_title':'Hello World!'}
+    context = {'page_title':'Hello!',
+               'intro':'Hello World!'}
     
     return render(request,template,context)
     

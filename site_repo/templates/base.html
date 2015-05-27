@@ -4,9 +4,9 @@
 
     <head>
 
-        <title> {{% block title %}} {{% endblock title %}}</title>
-        <script> {{ % block pre_scripts %}} {{% endblock pre_scripts %}}</script>
-        <style type="text/css"> {{% block embeded_style %}} {{% endblock embeded_style %}} </style>
+        <title> {% block title %} {{ page_title }} {% endblock title %}</title>
+        <script> {% block pre_scripts %} {% endblock pre_scripts %}</script>
+        <style type="text/css"> {% block embeded_style %} {% endblock embeded_style %} </style>
 
     </head>
 
@@ -14,7 +14,7 @@
 
     <body>
     
-    {{% block body %}} {{% endblock body %}}
+    {% block body %} {% endblock body %}
             
     </body>
 
