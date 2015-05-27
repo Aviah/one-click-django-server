@@ -55,7 +55,7 @@ These are the texts that you should replace (either with the script or, your edi
 
 ### SSH Public Key:
 
-1. From the command line:
+1. From the command line (make sure you are in the one-click-django-server directory):
 
     `you@dev-machine$ cp ~/.ssh/id_rsa.pub user/`
 
@@ -65,7 +65,8 @@ These are the texts that you should replace (either with the script or, your edi
 
 ### Change the django SECRET_KEY:
 
-1. From the command line (replace "foobar" with a random long string):
+1. From the command line (make sure you are in the one-click-django-server directory):
+*type a random long string instead of "foobar"*:
 
     `you@dev-machine$ python scripts/create_secret_key.py foobar`
     
@@ -76,10 +77,11 @@ These are the texts that you should replace (either with the script or, your edi
 ## Install
 ** Only after prep: text was replaced, id_rsa.pub was copied, SECRET_KEY changed **
 
-From the command line:
+From the command line (make sure you are in the one-click-django-server directory):
 
-1. Tar the files, from the directory where one-click-django-server is located :
-    `you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server`
+1. Tar the files:
+ ```you@dev-machine$ cd ..
+    you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server```
         
 2. Upload to server (replace PUB.IP.IP.IP with the VPS actual IP): 
     `you@dev-machine$ scp setup.tar.gz root@PUB.IP.IP.IP:~/`
@@ -91,11 +93,12 @@ From the command line:
     `root@li1234# tar -zxvf setup.tar.gz; chown -R root:root one-click-django-server`
     
 5. Run setup:
+*during installations you will need to provide 3 passwords: your linux sudo user password, MySQL root password, django superuser ('root') password' *
     `root@li1234# cd one-click-django-server; ./setup.sh`
     
-6. Reboot the server. Check the website with a browser!
+6. Reboot the server, then check the website with a browser!
 
-7. Check SSH w/o password:
+7. Check SSH without password:
 ```
     you@dev-machine$ ssh PUB.IP.IP.IP
     you@my-django-server$ echo "Hello Server"
@@ -107,5 +110,5 @@ From the command line:
 9. Check: 
     `you@dev-machine: ssh my-django-server`
 
-10. Packages Upgrade:
+10. Server packages upgrade:
     `root@li1234# sudo apt-get upgrade`
