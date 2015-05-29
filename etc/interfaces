@@ -1,5 +1,8 @@
 # Location: /etc/network/
 
+pre-up iptables-restore < /etc/iptables.rules.firewall
+# pre-up ip6tables-restore < /etc/ip6tables.rules.firewall
+
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
 

@@ -1,0 +1,2 @@
+alias firewall-up='sudo /usr/local/bin/./firewall_up.sh'
+alias firewall-down='sudo /usr/local/bin/./firewall_down.sh'

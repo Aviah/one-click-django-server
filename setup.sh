@@ -16,6 +16,12 @@ cp etc/hosts /etc/
 cp etc/interfaces /etc/network/
 cp etc/sshd_config /etc/ssh/
 
+# iptables
+cp etc/ip*.rules.* /etc/
+cp etc/iptables.rules.firewall /etc/iptables.rules.firewall.orig
+cp etc/ip6tables.rules.firewall /etc/ip6tables.rules.firewall.orig
+cp scripts/firewall_up.sh scripts/firewall_down.sh /usr/local/bin/
+
 
 # add sudo user with ssh access
 adduser --shell /bin/bash $USERNAME
@@ -26,7 +32,8 @@ mkdir /home/$USERNAME/.ssh
 cp user/id_rsa.pub /home/$USERNAME/.ssh/authorized_keys
 chmod 700 /home/$USERNAME/.ssh/
 chmod 600 /home/$USERNAME/.ssh/authorized_keys
-chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh/
+cp user/bash_aliases /home/$USERNAME/.bash_aliases
+chown -R $USERNAME:$USERNAME /home/$USERNAME/
 
 # Packages update
 apt-get update
