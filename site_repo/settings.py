@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 
 # Check if the repository public secret, and mysql password, were replaced
 if SECRET_KEY == 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README':
-    raise ImproperlyConfigured("Change SECRET_KEY in settings, see README")
+    raise ImproperlyConfigured("Change the SECRET_KEY in settings, see README")
 
 if DATABASES['PASSWORD'] == 'imnotsecret' + 'djangomysqlpassword':
     raise ImproperlyConfigured("Change the django user password to MySQL, see README")
