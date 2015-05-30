@@ -77,6 +77,9 @@ These are the texts that you should replace (either with the script or, your edi
 ## Install
 ** Only after prep: text was replaced, id_rsa.pub was copied, SECRET_KEY changed **
 
+* During installation you will be asked to provide four passwords: your linux user password (with sudo), django linux user (no sudo), 
+mysql root password and django site superuser ('root') password. Better to prepare these passwords beforehand *
+
 From the command line (make sure you are in the one-click-django-server directory):
 
 1. Tar the files:
@@ -105,10 +108,73 @@ From the command line (make sure you are in the one-click-django-server director
 ```
 
 8. Add the django server to your local hosts file:
-    `you@dev-machine: sudo nano /etc/hosts`
+    `you@dev-machine$ sudo nano /etc/hosts`
 
 9. Check: 
-    `you@dev-machine: ssh my-django-server`
+    `you@dev-machine$ ssh my-django-server`
 
 10. Server packages upgrade:
-    `root@li1234# sudo apt-get upgrade`
+    `you@my-django-server$ sudo apt-get upgrade`
+
+
+## Next Steps:
+
+
+1. The django project is saved in the django user home directory on the server. To access the project, ssh as django:
+    'you@dev-machine: ssh django@PUB.IP.IP.IP'
+
+2. To add people, or dev machines, simply add the public ssh key to the django user authorized keys:
+    '''you@dev-machine$ scp ~/.ssh/id_rsa.pub django@PUB.IP.IP.IP:~/keyname.pub
+       you@dev-machine$ ssh django@PUB.IP.IP.IP
+       django@my-django-server$ cat keyname.pub >> .ssh/authorized_keys'''
+
+3. Staging environment can be set in a similar way, with the same scripts, just replace the IP and the staging domain.
+You will need, however, to modify your git workflow.
+        
+4. The firewall is really basic. Add some advanced and more specific rules, there are many resources on the web, books and iptables
+docs.
+
+5. If you want to save passwords outside the repository, use site_config. E.g, add a file settings_password.py to mysite/site_config.
+then add to the settings.py file:
+
+    # to save passwords outside the repository
+    # the settings_passwords.py file should exist both in dev and production environment
+    from site_config import settings_password.py 
+
+
+
+## Django project structure
+
+The django project suggested here is built in specific way that already arrange for logs, static files etc.
+However, django is very flexible and everything could be easily changed.
+
+/home/django/
+    |
+    |- site_repo.git  (git bare repository, you push to this repo, and fetch it from the mysite/site_repo)
+    |
+    |- mysite (project directory)
+        |
+        |- logs (site logs, not a repository))
+        |   |- debug_db.log (django db queries, logs when DEBUG_DB_LOG = True)
+        |   |- debug_db.log (your logging.debug("debug msg") log, logs when DEBUG_LOG = True)
+        |   |- main.log (your logging.getLogger("main").info("production msg") log, logs everything from log level info)
+        |
+        |- manage.py (the django utility for the project)
+        |
+        |- media_root (media directory, not a repository)
+        |
+        |- site_config (optional settings directory on the python path, but not in a repository)
+        |   |
+        |   |- settings_production.py (settings.py will try to import this file, make sure it exists in production)
+        |   |- settings_tmp.py (settings.py will try to import this file, useful for ad-hoc settings during dev)
+        |
+        |- site_repo (this is the actual code repository for your django app)
+        |   |
+        |   |- settings.py
+        |   |- urls.py 
+        |   |- wsgi.py 
+        |   etc...
+        |
+        |- static_root (static js & css files, created from the repository with manage.py collect media, this dir is not a repository)
+        
+        
