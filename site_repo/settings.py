@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_db',
         'USER': 'django',
-        'PASSWORD':'djangomysqlpassword',
+        'PASSWORD':'imnotsecretdjangomysqlpassword',
         'HOST': '127.0.0.1',
         'PORT': 3306
     }
@@ -121,9 +121,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-# Check if a private secret key was set, instead of the public one
+# Check if the repository public secret, and mysql password, were replaced
 if SECRET_KEY == 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README':
     raise ImproperlyConfigured("Change SECRET_KEY in settings, see README")
+
+if DATABASES['PASSWORD'] == 'imnotsecret' + 'djangomysqlpassword':
+    raise ImproperlyConfigured("Change the django user password to MySQL, see README")
+
+
 
 # Allows a temp settings file, for dev, ad hoc logging etc
 try:

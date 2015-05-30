@@ -48,7 +48,7 @@ These are the texts that you should replace (either with the script or, your edi
 2. Replace "GET.IP.IP.IP" with" the actual VPS Getaway IP (files: etc/interfaces)
 3. Replace "myusername" with your actual username (files: setup.sh)
 4. Replace "example.com" with your actual domain (files: etc/hosts, site_repo/settings_production.py, etc/django-site-apache, etc/django-site-nginx)
-5. Replace "djangomysqlpassword" with actual password. This is the password that django will use to access MySQL (files: site_repo/settings.py, scripts/db.sql)
+5. Replace "imnotsecretdjangomysqlpassword" with actual password. This is the password that django will use to access MySQL (files: site_repo/settings.py, scripts/db.sql)
 6. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
 7. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/apache2.conf)
 

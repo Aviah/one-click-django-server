@@ -5,7 +5,7 @@
 find etc -type f -print | xargs sed -i "s/PUB.IP.IP.IP/replace-with-actual-vps-ip/g"
 sed -i "s/GET.IP.IP.IP/replace-with-actual-vps-getaway-ip/g" etc/interfaces
 sed -i "s/myusername/replace-with-your-username/g" setup.sh
-sed -i "s/djangomysqlpassword/replace-with-good-password/g" site_repo/settings.py scripts/db.sql
+sed -i "s/imnotsecretdjangomysqlpassword/replace-with-good-password/g" site_repo/settings.py scripts/db.sql
 
 # use yourdomain.com (or yourdomain.net, etc) without the www 
 find etc site_repo -type f -print | xargs sed -i "s/example.com/replace-with-yourdomain.com/g"
