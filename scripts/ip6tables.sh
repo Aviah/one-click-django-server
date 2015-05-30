@@ -39,3 +39,7 @@ ip6tables -A OUTPUT -p tcp --dport 587 -j ACCEPT
 # NTP
 ip6tables -A INPUT -p udp --sport 123 -m state --state ESTABLISHED -j ACCEPT
 ip6tables -A OUTPUT -p udp --dport 123 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# Ping
+ip6tables -A INPUT -p icmpv6 --icmpv6-type echo-request -j ACCEPT
+ip6tables -A OUTPUT -p icmpv6 --icmpv6-type echo-reply -j ACCEPT
