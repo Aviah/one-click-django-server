@@ -24,6 +24,9 @@ cp scripts/firewall_up.sh scripts/firewall_down.sh /usr/local/bin/
 
 
 # add sudo user with ssh access
+echo ">>> Adding **YOUR** user"
+echo "[press any key to continue]"
+read dummy
 adduser --shell /bin/bash $USERNAME
 usermod -a -G sudo $USERNAME
 groupadd sshgroup
@@ -41,7 +44,11 @@ apt-get update
 # django site
 apt-get install python-pip
 pip install Django==1.8.1
-useradd django -m -g www-data
+echo ">>> Adding **django** user (another password please)"
+echo "[press any key to continue]"
+read dummy
+adduser --shell /bin/bash django
+usermod -g www-data -G www-data,django,sshgroup django
 mkdir /home/django/$SITEPROJECTNAME
 cp -r site_repo /home/django/$SITEPROJECTNAME/
 cp scripts/manage.py /home/django/$SITEPROJECTNAME/
@@ -60,7 +67,6 @@ chmod -R o-w /home/django
 chmod -R g+r /home/django
 chmod -R g+w /home/django/$SITEPROJECTNAME/logs/
 cp scripts/django_projects.pth /usr/lib/python2.7/dist-packages/
-
 
 # Webservers
 apt-get install nginx
@@ -99,12 +105,27 @@ apt-get install python-mysqldb
 echo "Use MySQL root password"
 mysql -uroot -p < scripts/db.sql
 
+# Site git repository
+mkdir /home/django/.ssh
+cp user/id_rsa.pub /home/django/.ssh/authorized_keys
+chmod 700 /home/django/.ssh/
+chmod 600 /home/django/.ssh/authorized_keys
+chown -R django:django /home/django/.ssh
+apt-get install git
+git init /home/django/$SITEPROJECTNAME/site_repo/
+cd /home/django/$SITEPROJECTNAME/site_repo/
+git add .
+git commit -m 'init site repository'
+chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
+
+
 # Init
 /home/django/mysite/manage.py migrate
 /home/django/mysite/manage.py createsuperuser
 chown -R django:www-data /home/django/
 
 echo "Woohoo! Reboot the machine, if everything OK you should be able to visit the site in your browser"
+echo "Once everything works, uncomment the ip6tables firewall rules, see README"
 
 
 

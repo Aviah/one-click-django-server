@@ -1,14 +1,14 @@
 # Location: /etc/network/
 
-pre-up iptables-restore < /etc/iptables.rules.firewall
-# pre-up ip6tables-restore < /etc/ip6tables.rules.firewall
-
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
 
 # The loopback network interface
 auto lo
 iface lo inet loopback
+
+pre-up iptables-restore < /etc/iptables.rules.firewall
+# pre-up ip6tables-restore < /etc/ip6tables.rules.firewall
 
 # The primary network interface
 auto eth0 eth0:1
