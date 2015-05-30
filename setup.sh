@@ -50,7 +50,6 @@ read dummy
 adduser --shell /bin/bash django
 usermod -g www-data -G www-data,django,sshgroup django
 mkdir /home/django/$SITEPROJECTNAME
-cp -r site_repo /home/django/$SITEPROJECTNAME/
 cp scripts/manage.py /home/django/$SITEPROJECTNAME/
 mkdir /home/django/$SITEPROJECTNAME/media_root
 mkdir /home/django/$SITEPROJECTNAME/static_root
@@ -112,19 +111,22 @@ chmod 700 /home/django/.ssh/
 chmod 600 /home/django/.ssh/authorized_keys
 chown -R django:django /home/django/.ssh
 apt-get install git
-git init /home/django/$SITEPROJECTNAME/site_repo/
-cd /home/django/$SITEPROJECTNAME/site_repo/
+cd site_repo
+git init
 git add .
 git commit -m 'init site repository'
+cd ..
+git clone --bare site_repo /home/django/site_repo.git
+git clone  /home/django/site_repo.git /home/django/$SITEPROJECTNAME/site_repo/
+chown -R django:django /home/django/site_repo.git
 chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 
-
-# Init
+# Init site
 /home/django/mysite/manage.py migrate
 /home/django/mysite/manage.py createsuperuser
 chown -R django:www-data /home/django/
 
-echo "Woohoo! Reboot the machine, if everything OK you should be able to visit the site in your browser"
+echo "Woohoo! Done. Reboot the machine. If everything is OK, you should be able to visit the site in your browser"
 echo "Once everything works, uncomment the ip6tables firewall rules, see README"
 
 

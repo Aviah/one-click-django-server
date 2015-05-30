@@ -24,7 +24,7 @@ TEMPLATE_DIRS = ["%s/templates/"%os.path.dirname(os.path.abspath(__file__))]
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+krs!8z@47nussjv17t90b&w3h)a0e#61f=mxoglg3^@kr@9tp'
+SECRET_KEY = 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
