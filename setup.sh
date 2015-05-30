@@ -88,7 +88,7 @@ echo "[press any key to continue]"
 read dummy
 apt-get install mysql-server mysql-client
 echo; echo ">>> Running mysql_secure_installation. If the root password you just entered is strong, you don't need to change it"
-echo ">>>For the rest of the options, select the defaults"
+echo ">>> For the rest of the options, select the defaults"
 echo "[press any key to continue]"
 read dummy
 mysql_secure_installation
