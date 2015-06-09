@@ -20,6 +20,8 @@ MEDIA_ROOT = "%s/media_root/"%BASE_DIR
 STATIC_ROOT = "%s/static_root/"%BASE_DIR
 TEMPLATE_DIRS = ["%s/templates/"%os.path.dirname(os.path.abspath(__file__))]
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -27,14 +29,14 @@ TEMPLATE_DIRS = ["%s/templates/"%os.path.dirname(os.path.abspath(__file__))]
 SECRET_KEY = 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Debug logging, consider preformance
 # Application logs are found in project-dir/logs. On production see /home/django/projectname/logs/
 # For temporary debug logging, add DEBUG_LOG = True, or DEBUG_DB_LOG = True, to site_config/settings_tmp.py, and reload
 
 # if True, logs all logging.debug() statements, saved to to debug.log, and catch other logs. Otherwise ignores
-DEBUG_LOG = True 
+DEBUG_LOG = False 
 
 # django auto logger of all the code-to-database interactions. Saved to debug_db.logs
 DEBUG_DB_LOG = False
@@ -128,6 +130,12 @@ if SECRET_KEY == 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README':
 if DATABASES['default']['PASSWORD'] == 'imnotsecret' + 'djangomysqlpassword':
     raise ImproperlyConfigured("Change the django user password to MySQL, see README")
 
+
+# Dev settings, available only on dev machine
+try:
+    from site_config.settings_dev import *
+except:
+    pass
 
 
 # Allows a temp settings file, for dev, ad hoc logging etc

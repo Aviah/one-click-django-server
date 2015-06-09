@@ -42,7 +42,7 @@ Simply edit and run the find_replace.sh script:
     you@dev-machine$ ./find_replace.sh```
     
 
-These are the texts that you should replace (either with the script or, your editor of choice):
+These are the texts that you should replace (either with the find_replace script, or a text editor):
 
 1. Replace "PUB.IP.IP.IP" with the actual VPS Public IP (files: etc/hosts, etc/interfaces, etc/django-site-nginx)
 2. Replace "GET.IP.IP.IP" with" the actual VPS Getaway IP (files: etc/interfaces)
@@ -117,6 +117,16 @@ From the command line (make sure you are in the one-click-django-server director
     `you@my-django-server$ sudo apt-get upgrade`
 
 
+## Command line aliases:
+
+1. firewall-up: loads the firewall
+2. firewall-down: clears all iptables rules, sometimes useful for debugging
+
+
+
+
+
+
 ## Next Steps:
 
 
@@ -129,12 +139,12 @@ From the command line (make sure you are in the one-click-django-server director
        django@my-django-server$ cat keyname.pub >> .ssh/authorized_keys'''
 
 3. Staging environment can be set in a similar way, with the same scripts, just replace the IP and the staging domain.
-You will need, however, to modify your git workflow.
+You will need, however, to modify your git workflow between dev, staging, production
         
 4. The firewall is really basic. Add some advanced and more specific rules, there are many resources on the web, books and iptables
 docs.
 
-5. If you want to save passwords outside the repository, use site_config. E.g, add a file settings_password.py to mysite/site_config.
+5. If you want to save passwords, secret key etc outside the repository, use site_config directory. E.g, add a file like settings_password.py to mysite/site_config.
 then add to the settings.py file:
 
     # to save passwords outside the repository
@@ -142,10 +152,9 @@ then add to the settings.py file:
     from site_config import settings_password.py 
 
 
+## The project structure
 
-## Django project structure
-
-The django project suggested here is built in specific way that already arrange for logs, static files etc.
+The django project suggested here is built in a specific way that already arrange for logs, static files etc.
 However, django is very flexible and everything could be easily changed.
 
 /home/django/
@@ -155,7 +164,7 @@ However, django is very flexible and everything could be easily changed.
     |- mysite (project directory)
         |
         |- logs (site logs, not a repository))
-        |   |- debug_db.log (django db queries, logs when DEBUG_DB_LOG = True)
+        |   |- debug.log (django db queries, logs when DEBUG_DB_LOG = True)
         |   |- debug_db.log (your logging.debug("debug msg") log, logs when DEBUG_LOG = True)
         |   |- main.log (your logging.getLogger("main").info("production msg") log, logs everything from log level info)
         |
@@ -168,13 +177,28 @@ However, django is very flexible and everything could be easily changed.
         |   |- settings_production.py (settings.py will try to import this file, make sure it exists in production)
         |   |- settings_tmp.py (settings.py will try to import this file, useful for ad-hoc settings during dev)
         |
-        |- site_repo (this is the actual code repository for your django app)
+        |- site_repo (this is the actual code repository for your django webapp project)
         |   |
         |   |- settings.py
         |   |- urls.py 
         |   |- wsgi.py 
         |   etc...
         |
-        |- static_root (static js & css files, created from the repository with manage.py collect media, this dir is not a repository)
+        |- static_root (static js & css files, created from the repository with manage.py collectstatic, this dir is not a repository)
         
         
+## Static files:
+
+1. During development, set DEBUG=True, and work on the static files in the repository, at site_repo/static
+2. Files will be available in 127.0.0.1:8000 in django dev server (manage.py runserver)
+3. Refernces to the js,css files in the templates should use the "static" template tag (see base.html)
+4. In production, or production testing, after changes to static files, run "manage.py collectstatic", then restart Apache
+5. Files will be avaialble for the site, in the static_root directory, served directly by Nginx (by a location alias config)
+
+Note: django also supports serving static files from an application's  directory, see django docs
+
+## Templates:
+
+Templates are saved in the site_repo/templates directory.
+
+Note: django also supports serving templates from an application's  directory, see django docs

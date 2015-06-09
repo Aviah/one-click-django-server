@@ -56,7 +56,7 @@ mkdir /home/django/$SITEPROJECTNAME/static_root
 mkdir /home/django/$SITEPROJECTNAME/site_config
 touch /home/django/$SITEPROJECTNAME/site_config/__init__.py
 cp site_repo/settings_production.py /home/django/$SITEPROJECTNAME/site_config/
-touch /home/django/$SITEPROJECTNAME/site_config/settings_tmp.py
+cp scripts/settings_tmp.py /home/django/$SITEPROJECTNAME/site_config/
 mkdir /home/django/$SITEPROJECTNAME/logs
 touch /home/django/$SITEPROJECTNAME/logs/main.log
 touch /home/django/$SITEPROJECTNAME/logs/debug.log
@@ -124,6 +124,7 @@ chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 # Init site
 /home/django/mysite/manage.py migrate
 /home/django/mysite/manage.py createsuperuser
+/home/django/mysite/manage.py collectstatic
 chown -R django:www-data /home/django/
 
 echo "Woohoo! Done. Reboot the machine. If everything is OK, you should be able to visit the site in your browser"
