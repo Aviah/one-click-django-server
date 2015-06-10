@@ -31,14 +31,10 @@ SECRET_KEY = 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# Debug logging, consider preformance
-# Application logs are found in project-dir/logs. On production see /home/django/projectname/logs/
-# For temporary debug logging, add DEBUG_LOG = True, or DEBUG_DB_LOG = True, to site_config/settings_tmp.py, and reload
-
-# if True, logs all logging.debug() statements, saved to to debug.log, and catch other logs. Otherwise ignores
+# logs logging.debug() to logs/debug.log
 DEBUG_LOG = False 
 
-# django auto logger of all the code-to-database interactions. Saved to debug_db.logs
+# auto django logger of all database interactions to logs/debug_db.log. Note: to log this, also set DEBUG=True 
 DEBUG_DB_LOG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost']
@@ -163,11 +159,10 @@ class RequireDebugDBLogTrue(logging.Filter):
     def filter(self, record):
         return DEBUG_DB_LOG
     
-# Config loggers
-# Added debug.log and main.log to django defaults, will log by the DEBUG_LOG, DEBUG_DB_LOG settings, see above
-# Log to debug.log:  logging.debug('some debugging msg')
-# Log to main.log: logging.getLogger('main').info('important production msg')
-# main.log accepts info and higher levels
+
+# logging.debug('dev msg'), will log when DEBUG_LOG=True
+# logging.getLogger('main').info('production msg'), will log when level >= info
+# debug_db.log will auto log all db transaction by django when DEBUG=True & DEBUG_DB_LOG=True
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -230,10 +225,12 @@ LOGGING = {
             'propagate':True
         },
         '': {
+            'level':'DEBUG',
             'handlers': ['default'],
             'propagate':True
             },
         'main': {
+            'level':'INFO',
             'handlers': ['main'],
             'propagate':True
             },
@@ -243,7 +240,6 @@ LOGGING = {
             },         
     }
 }
-
 
 
 
