@@ -185,9 +185,19 @@ However, django is very flexible and everything could be easily changed.
         |   etc...
         |
         |- static_root (static js & css files, created from the repository with manage.py collectstatic, this dir is not a repository)
+          
+  
+  
+## Extrnal files: JS, CSS, images  
+
+Out of the box, django separates extrnal resources into two categories, each served from it's own url and root directory: site resources, and user uploads.
+However, it's often handy to have three categories, as follows:
+1. js & css scripts: These are the files that often change during development, and thus served after manage.py collectstatic. During development, they are served from the repository.
+2. Other, non js or css, pre-prepared and optimised assets: e.g. logo, icons etc. Always served from a different directory, outside the repository
+3. User uploads: e.g. avatars, another directory
+
         
-        
-## Static files:
+## Script files (JS,CSS):
 
 1. During development, set DEBUG=True, and work on the static files in the repository, at site_repo/static
 2. Files will be available in 127.0.0.1:8000 in django dev server (manage.py runserver)
@@ -196,6 +206,23 @@ However, django is very flexible and everything could be easily changed.
 5. Files will be avaialble for the site, in the static_root directory, served directly by Nginx (by a location alias config)
 
 Note: django also supports serving static files from an application's  directory, see django docs
+Note: django will pick any other static resource using the "static" url or directory. However, for non js, css, it helps to use different URL and directory, as follows.
+
+## Non js/css pre-prepared resources:
+
+1. Files are served from media_resources/ directory, both for runserver , or via Nginx
+2. Files will be available in 127.0.0.1:8000 in django dev server when DEBUG=True
+3. Refernces to in templates should use {{ MEDIA_RES_URL }} (see base_home.html)
+4. Favicon is also served from this directory, the file is media_resources/favicon.ico (see base.html )
+5. In production, or production testing the files are served from the same directory. 
+6. Do not replace files with other files with same name, since browsers may still show the older files from cache
+
+
+
+## Uploads:
+1. Files are served from media_uploads/ directory, both for runserver , or via Nginx
+2. Uploads are configured with MEDIA_URL and MEDIA_ROOT, django's settings for uploaded files, see django docs
+
 
 ## Templates:
 

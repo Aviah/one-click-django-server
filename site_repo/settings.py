@@ -16,11 +16,20 @@ from django.core.exceptions import ImproperlyConfigured
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT = "%s/media_root/"%BASE_DIR
-STATIC_ROOT = "%s/static_root/"%BASE_DIR
 TEMPLATE_DIRS = ["%s/templates/"%os.path.dirname(os.path.abspath(__file__))]
 
+# Static script files (CSS, JavaScript)
+STATIC_URL = '/static/'
+STATIC_ROOT = "%s/static_root/"%BASE_DIR
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+# Site pre-prepared media resources (logo, icons etc)
+MEDIA_RES_URL = '/media/'
+MEDIA_RES_ROOT = "%s/media_resources/"%BASE_DIR
+
+# Users' uploads 
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = "%s/media_uploads/"%BASE_DIR
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -111,12 +120,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_URL = '/static/'
 
 
 # Check if the repository public secret, and mysql password, were replaced

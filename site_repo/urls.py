@@ -27,6 +27,8 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += [
-        url(r'^static/(?P<path>.*)$', views.serve),
-    ]
+    urlpatterns += [url(r'^static/(?P<path>.*)$', views.serve),]
+    urlpatterns += static(settings.MEDIA_RES_URL, document_root=settings.MEDIA_RES_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+    
+    

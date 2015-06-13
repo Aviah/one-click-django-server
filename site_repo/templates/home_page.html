@@ -1,11 +1,31 @@
 {% extends "base.html" %}
 {% block body %}
 
-    <h1> {{ intro }} </h1> 
+    <div class="content">
+        <h1> {{ intro }} </h1> 
+    </div>
+            
     
-    <button type="button" onClick="show_static_info();" class="info"> Static Files Info </button>
-
-
+    <div class="content">    
+        <h3> Static files: </h3>
+        <p> click the button, if static files work, an alert should appear </p>
+        <button type="button" onClick="show_static_info();" class="info"> Static Files Info </button>    
+    </div>
+    
+    <div class="content">
+        <h3> Image from media resources: </h3>
+        <p> for the site pre-prepared, optimized media (e.g. logo, favicon, icons)</p>
+        <img src="{{ MEDIA_RES_URL }}django-pony.jpg">
+    </div>
+    
+    <div class="content">
+        <h3> Image from media uploads: </h3>
+        <p> for the users' uploaded media (e.g. avatars)</p>
+        <img src="{{ MEDIA_URL }}avatar.png"  class="avatar"/>
+    </div>
+    
+    
+    
 
 
 {% endblock body %}

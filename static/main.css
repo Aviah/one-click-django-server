@@ -1,1 +1,5 @@
-.info {color:red;}
+.info {font-weight:bold;}
+
+img.avatar {width:120px;height:120px;}
+
+div.content {padding-bottom:20px;}

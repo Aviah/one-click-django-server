@@ -1,4 +1,6 @@
 {% load static from staticfiles %}
+
+
 <!DOCTYPE html>
 
 <html>
@@ -6,8 +8,10 @@
     <head>
 
         <title> {% block title %} {{ page_title }} {% endblock title %}</title>
+        <link rel="icon" type="image/png" href="{{MEDIA_RES_URL}}favicon.ico"/>
         <script type="text/javascript" src="{% static 'main.js' %}" ></script>
         <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+        
         <script> {% block pre_scripts %} {% endblock pre_scripts %}</script>
         <style type="text/css"> {% block embeded_style %} {% endblock embeded_style %} </style>
 

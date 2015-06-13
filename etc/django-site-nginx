@@ -33,6 +33,23 @@ server {
 		proxy_pass http://127.0.0.1:8001;	
 	
 	}
+	
+	location  /static { 
+	alias /home/aviah/myprojects/mysite/static_root;
+
+	} 
+	
+	location /media {
+	alias /home/aviah/myprojects/mysite/media_resources;
+
+	}
+
+
+	location /uploads {
+	alias /home/aviah/myprojects/mysite/media_uploads;
+
+	}
+
 	#location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
