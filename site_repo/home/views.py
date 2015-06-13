@@ -1,3 +1,5 @@
+import logging
+from django.core.cache import cache
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,7 +12,10 @@ def home_page(request):
     context = {'page_title':'It Works',
                'intro':'Hello World!'}
     
-    # test logging
+    # cache
+    cache.set('foo','buz')
+
+    # logging
     main_logger.info("home page, production log")
     logging.debug("home_page, debug log")
     request.session['foo'] = 'baz' # a db interaction

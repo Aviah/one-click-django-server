@@ -123,12 +123,7 @@ From the command line (make sure you are in the one-click-django-server director
 2. firewall-down: clears all iptables rules, sometimes useful for debugging
 
 
-
-
-
-
 ## Next Steps:
-
 
 1. The django project is saved in the django user home directory on the server. To access the project, ssh as django:
     'you@dev-machine: ssh django@PUB.IP.IP.IP'
@@ -156,12 +151,13 @@ then add to the settings.py file:
 
 The django project suggested here is built in a specific way that already arrange for logs, static files etc.
 However, django is very flexible and everything could be easily changed.
+This is the server directory. The local dev directory is similar, under the user home dir, and with a cloned git repo from the server
 
 /home/django/
     |
     |- site_repo.git  (git bare repository, you push to this repo, and fetch it from the mysite/site_repo)
     |
-    |- mysite (project directory)
+    |- mysite (the project directory)
         |
         |- logs (site logs, not a repository))
         |   |- debug.log (django db queries, logs when DEBUG_DB_LOG = True)
@@ -170,7 +166,9 @@ However, django is very flexible and everything could be easily changed.
         |
         |- manage.py (the django utility for the project)
         |
-        |- media_root (media directory, not a repository)
+        |- media_resources (pre-prepared site media directory, not a repository. e.g. logo, icons, etc)
+        |
+        |- media_uploads (media directory, not a repository, for user uploaded resources, e.g. avatars)
         |
         |- site_config (optional settings directory on the python path, but not in a repository)
         |   |
@@ -197,7 +195,7 @@ However, it's often handy to have three categories, as follows:
 3. User uploads: e.g. avatars, another directory
 
         
-## Script files (JS,CSS):
+### Script files (JS,CSS):
 
 1. During development, set DEBUG=True, and work on the static files in the repository, at site_repo/static
 2. Files will be available in 127.0.0.1:8000 in django dev server (manage.py runserver)
@@ -208,9 +206,10 @@ However, it's often handy to have three categories, as follows:
 Note: django also supports serving static files from an application's  directory, see django docs
 Note: django will pick any other static resource using the "static" url or directory. However, for non js, css, it helps to use different URL and directory, as follows.
 
-## Non js/css pre-prepared resources:
 
-1. Files are served from media_resources/ directory, both for runserver , or via Nginx.
+### Non js/css pre-prepared resources:
+
+1. Files are served from mysite/media_resources/ directory, both for runserver , or via Nginx.
 2. Copy the logo, icons (or any other non js,css resource) files to this directory. On production, to /home/django/mysite/media_resources, using the django user permissions
 example: ```you@dev-machine: scp logo.png django@PUB.IP.IP.IP:~/mysite/media_resources/```
 3. Files will be available in 127.0.0.1:8000 in django dev server when DEBUG=True
@@ -220,8 +219,7 @@ example: ```you@dev-machine: scp logo.png django@PUB.IP.IP.IP:~/mysite/media_res
 7. Do not replace files with other files with same name, since browsers may still show the older files from cache
 
 
-
-## Uploads:
+### Uploads:
 1. Files are served from media_uploads/ directory, both for runserver , or via Nginx
 2. Uploads are configured with MEDIA_URL and MEDIA_ROOT, django's settings for uploaded files, see django docs
 
@@ -245,3 +243,11 @@ so everything is in one place.
 To use this logger set DEBUG_DB_LOG=True. If also DEBUG=True, the db activity is logged to logs/debug_db.log.
 
 Note: django provides many other loggers and options, see docs.
+
+
+## Cache
+
+1. A simple basic file-based cache (the directory is mysite/django_cache)
+2. To use the cache: from django.core.cache import cache, and then cache.set, cache.get etc (see home/views.py)
+
+Note: django provides many other caching options, multiple caches, etc. see docs.

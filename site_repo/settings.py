@@ -49,6 +49,18 @@ DEBUG_DB_LOG = False
 ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
+# Cache
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': "%s/django_cache/"%BASE_DIR,
+    }
+}
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = (

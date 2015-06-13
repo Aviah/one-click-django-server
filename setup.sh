@@ -63,6 +63,7 @@ mkdir /home/django/$SITEPROJECTNAME/logs
 touch /home/django/$SITEPROJECTNAME/logs/main.log
 touch /home/django/$SITEPROJECTNAME/logs/debug.log
 touch /home/django/$SITEPROJECTNAME/logs/debug_db.log
+mkdir /home/django/$SITEPROJECTNAME/django_cache
 chown -R django:www-data /home/django
 chmod -R o-w /home/django
 chmod -R g+r /home/django
