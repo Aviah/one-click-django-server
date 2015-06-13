@@ -51,8 +51,10 @@ adduser --shell /bin/bash django
 usermod -g www-data -G www-data,django,sshgroup django
 mkdir /home/django/$SITEPROJECTNAME
 cp scripts/manage.py /home/django/$SITEPROJECTNAME/
-mkdir /home/django/$SITEPROJECTNAME/media_root
 mkdir /home/django/$SITEPROJECTNAME/static_root
+mkdir /home/django/$SITEPROJECTNAME/media_uploads
+mkdir /home/django/$SITEPROJECTNAME/media_resources
+cp images/* /home/django/$SITEPROJECTNAME/media_resources/
 mkdir /home/django/$SITEPROJECTNAME/site_config
 touch /home/django/$SITEPROJECTNAME/site_config/__init__.py
 cp site_repo/settings_production.py /home/django/$SITEPROJECTNAME/site_config/
