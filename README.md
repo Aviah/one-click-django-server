@@ -210,12 +210,14 @@ Note: django will pick any other static resource using the "static" url or direc
 
 ## Non js/css pre-prepared resources:
 
-1. Files are served from media_resources/ directory, both for runserver , or via Nginx
-2. Files will be available in 127.0.0.1:8000 in django dev server when DEBUG=True
-3. Refernces to in templates should use {{ MEDIA_RES_URL }} (see base_home.html)
-4. Favicon is also served from this directory, the file is media_resources/favicon.ico (see base.html )
-5. In production, or production testing the files are served from the same directory. 
-6. Do not replace files with other files with same name, since browsers may still show the older files from cache
+1. Files are served from media_resources/ directory, both for runserver , or via Nginx.
+2. Copy the logo, icons (or any other non js,css resource) files to this directory. On production, to /home/django/mysite/media_resources, using the django user permissions
+example: ```you@dev-machine: scp logo.png django@PUB.IP.IP.IP:~/mysite/media_resources/```
+3. Files will be available in 127.0.0.1:8000 in django dev server when DEBUG=True
+4. Refernces to these files in templates should use {{ MEDIA_RES_URL }} (see base_home.html)
+5. Favicon is also served from this directory. The file is media_resources/favicon.ico (see base.html )
+6. In production, or production testing, the files are served by Nginx directly from the same directory. 
+7. Do not replace files with other files with same name, since browsers may still show the older files from cache
 
 
 
