@@ -38,17 +38,24 @@ server {
 	
 	location  /static { 
 	alias /home/aviah/myprojects/mysite/static_root;
+	expires 180d;
+	gzip on;
+	gzip_types text/css application/x-javascript;
 
 	} 
 	
 	location /media {
 	alias /home/aviah/myprojects/mysite/media_resources;
+	expires 180d;
+	gzip off;
 
 	}
 
 
 	location /uploads {
 	alias /home/aviah/myprojects/mysite/media_uploads;
+	expires 180d;
+	gzip off;
 
 	}
 

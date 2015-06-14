@@ -194,6 +194,7 @@ However, it's often handy to have three categories, as follows:
 2. Other, non js or css, pre-prepared and optimised assets: e.g. logo, icons etc. Always served from a different directory, outside the repository
 3. User uploads: e.g. avatars, another directory
 
+For external files expire date and browser cache see "Webservers"
         
 ### Script files (JS,CSS):
 
@@ -232,7 +233,7 @@ Templates are saved in the site_repo/templates directory.
 Note: django also supports serving templates from an application's  directory, see django docs
 
 
-## Logging
+## Logging:
 
 1. Logs are saved to the project logs/ directory
 2. For dev, set DEBUG_LOG=True, and use logging.debug('debug msg'), which logs to mysite/logs/debug.log, when DEBUG_LOG=True
@@ -246,7 +247,7 @@ To use this logger set DEBUG_DB_LOG=True. If also DEBUG=True, the db activity is
 Note: django provides many other loggers and options, see docs.
 
 
-## Cache
+## Cache:
 
 1. A simple basic file-based cache (the directory is mysite/django_cache)
 2. To use the cache: from django.core.cache import cache, and then cache.set, cache.get etc (see home/views.py)
@@ -258,4 +259,8 @@ Note: django provides many other caching options, multiple caches, etc. see docs
 
 1. Runserver: Develop and test with django development server, on 127.0.0.1:8000. When DEBUG=True, everything is served with this server.
 2. Nginx,Apache: Nginx passes the python code to the Apache (with mod_wsgi) proxy, and serves the static files, media and uploads directly
-directly. See
+directly.
+3. In Nginx, the static,media resoruces and uploads dirs are configured to 180d expiry. This will affect script files (css,jss), since any change is reflected with a new
+name by collectstatic. Images, however, in media resources and uploads, will be served from browser cache for this period. Changing them requires to a new file with a new name
+(so the browser do not find a cached version)
+4. During initial development, when the images change, just clear the browser cache, use a new "incognito" window, or change the 180d config in /etc/nginx/sites-enabled/django
