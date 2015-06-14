@@ -188,7 +188,7 @@ This is the server directory. The local dev directory is similar, under the user
   
 ## Extrnal files: JS, CSS, images  
 
-Out of the box, django separates extrnal resources into two categories, each served from it's own url and root directory: site resources, and user uploads.
+Out of the box, django seperates extrnal resources into two categories: site resources, and user uploads. Each is served from it's own url and root directory.
 However, it's often handy to have three categories, as follows:
 1. js & css scripts: These are the files that often change during development, and thus served after manage.py collectstatic. During development, they are served from the repository.
 2. Other, non js or css, pre-prepared and optimised assets: e.g. logo, icons etc. Always served from a different directory, outside the repository
@@ -222,6 +222,7 @@ example: ```you@dev-machine: scp logo.png django@PUB.IP.IP.IP:~/mysite/media_res
 ### Uploads:
 1. Files are served from media_uploads/ directory, both for runserver , or via Nginx
 2. Uploads are configured with MEDIA_URL and MEDIA_ROOT, django's settings for uploaded files, see django docs
+3. For complete info about uploads see django docs. This project config respects django default to use MEDIA_URL and MEDIA_ROOT for uploads.
 
 
 ## Templates:
@@ -234,13 +235,13 @@ Note: django also supports serving templates from an application's  directory, s
 ## Logging
 
 1. Logs are saved to the project logs/ directory
-2. For dev, set DEBUG_LOG=True, and use logging.debug('debug msg'), which logs to logs/debug.log, when DEBUG_LOG=True
-3. For prodution, use logging.getLogger('main').info('production msg'), which logs to logs/main.log when log level >= info.
+2. For dev, set DEBUG_LOG=True, and use logging.debug('debug msg'), which logs to mysite/logs/debug.log, when DEBUG_LOG=True
+3. For prodution, use logging.getLogger('main').info('production msg'), which logs to mysite/logs/main.log when log level >= info.
 4. During development, it's easy to work only with debug.log, which also gets both debug and the 'main' logger,
 so everything is in one place.
 5. On production, just set DEBUG_LOG=False, unless debug logging is required to debug something on the server.
 6. Django can automatically log all db transactions. This feature is really handy during development, but a preformance issue on production.
-To use this logger set DEBUG_DB_LOG=True. If also DEBUG=True, the db activity is logged to logs/debug_db.log.
+To use this logger set DEBUG_DB_LOG=True. If also DEBUG=True, the db activity is logged to mysite/logs/debug_db.log.
 
 Note: django provides many other loggers and options, see docs.
 
@@ -251,3 +252,10 @@ Note: django provides many other loggers and options, see docs.
 2. To use the cache: from django.core.cache import cache, and then cache.set, cache.get etc (see home/views.py)
 
 Note: django provides many other caching options, multiple caches, etc. see docs.
+
+
+## Web servers:
+
+1. Runserver: Develop and test with django development server, on 127.0.0.1:8000. When DEBUG=True, everything is served with this server.
+2. Nginx,Apache: Nginx passes the python code to the Apache (with mod_wsgi) proxy, and serves the static files, media and uploads directly
+directly. See
