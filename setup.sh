@@ -20,8 +20,11 @@ cp etc/sshd_config /etc/ssh/
 cp etc/ip*.rules.* /etc/
 cp etc/iptables.rules.firewall /etc/iptables.rules.firewall.orig
 cp etc/ip6tables.rules.firewall /etc/ip6tables.rules.firewall.orig
-cp scripts/firewall_up.sh scripts/firewall_down.sh /usr/local/bin/
 
+
+# command line scripts
+cp scripts/firewall*.sh /usr/local/bin/
+cp scripts/site*.sh /usr/local/bin/
 
 # add sudo user with ssh access
 echo ">>> Adding **YOUR** user"
@@ -86,6 +89,8 @@ rm /etc/nginx/sites-enabled/default
 cp etc/django-site-apache /etc/apache2/sites-available/django
 ln -s /etc/apache2/sites-available/django /etc/apache2/sites-enabled/django
 rm /etc/apache2/sites-enabled/000-default.conf
+cp /usr/share/nginx/html/index.html /usr/share/nginx/html/index.html.orig
+cp scripts/maintenance_page.html /usr/share/nginx/html/index.html
 service nginx restart
 service apache2 restart
 
