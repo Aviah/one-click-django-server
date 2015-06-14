@@ -30,7 +30,9 @@ server {
 	server_name www.example.com example.com;
 
 	location / {
-		proxy_pass http://127.0.0.1:8001;	
+		proxy_pass http://127.0.0.1:8001;
+		proxy_set_header HOST $host;
+		proxy_set_header X-FORWARDED-FOR $remote_addr;
 	
 	}
 	
