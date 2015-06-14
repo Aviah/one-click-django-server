@@ -120,8 +120,10 @@ From the command line (make sure you are in the one-click-django-server director
 ## Command line aliases:
 
 1. firewall-up: loads the firewall
-2. firewall-down: clears all iptables rules, sometimes useful for debugging
-
+2. firewall-down: clears all iptables rules, so no firewall at all. Sometimes useful for debugging
+3. site-maintenance: shutsdown apache gracefuly, waits 1 minute, and moves Nginx to a one-page static maintenance html site (maintenance file is /usr/share/nginx/html/index.html)
+4. site-up: restarts apache, and restart Nginx with the django site
+5. site-reload: touches the wsgi file, so mod-wsgi reloads the python code. Useful if only pycode changed, and there is no need to restart Apache
 
 ## Next Steps:
 
