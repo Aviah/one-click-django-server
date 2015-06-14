@@ -12,6 +12,6 @@ find etc site_repo -type f -print | xargs sed -i "s/example.com/replace-with-you
 
 # Optional, uncomment to replace
 # find etc -type f -print | xargs sed -i "s/my-django-server/replace-with-another-vps-hostname/g"
-# sed -i "s/mysite/replace-with-another-project-name/g" setup.sh scripts/django_projects.pth etc/apache2.conf
+# sed -i "s/mysite/replace-with-another-project-name/g" setup.sh scripts/django_projects.pth scripts/site-reload.sh etc/apache2.conf
 
 echo "Done. Don't forget to copy your SSH public key, and replace django SECRET_KEY. See README"

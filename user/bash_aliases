@@ -2,3 +2,5 @@ alias firewall-up='sudo /usr/local/bin/./firewall_up.sh'
 alias firewall-down='sudo /usr/local/bin/./firewall_down.sh'
 alias site-up='sudo /usr/local/bin/./site-up.sh'
 alias site-maintenance='sudo /usr/local/bin/./site-maintenance.sh'
+alias site-reload='sudo /usr/local/bin/./site-reload.sh'
+
