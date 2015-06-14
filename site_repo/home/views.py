@@ -1,7 +1,7 @@
 import logging
 from django.core.cache import cache
 from django.shortcuts import render
-
+from site_repo.utils import get_ip
 # Create your views here.
 
 main_logger = logging.getLogger('main')
@@ -9,8 +9,11 @@ main_logger = logging.getLogger('main')
 def home_page(request):
     
     template = 'home_page.html'
+    
     context = {'page_title':'It Works',
-               'intro':'Hello World!'}
+               'intro':'Hello World!'}    
+    
+    context['ip'] = get_ip(request)
     
     # cache
     cache.set('foo','buz')

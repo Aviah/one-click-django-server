@@ -1,1 +1,1 @@
-Misc utils modules and function, mainly helpers that are not a django application.
+Misc utils modules and functions, mainly helpers that are not a django application.
