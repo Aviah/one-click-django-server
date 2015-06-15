@@ -10,8 +10,14 @@ sed -i "s/imnotsecretdjangomysqlpassword/replace-with-good-password/g" site_repo
 # use yourdomain.com (or yourdomain.net, etc) without the www 
 find etc site_repo -type f -print | xargs sed -i "s/example.com/replace-with-yourdomain.com/g"
 
+# Entire site Apache password
+sed -i "s/apacheusername/replace-with-another-username/g" scripts/site_auth.py
+sed -i "s/apachepasswd/replace-with-another-password/g" scripts/site_auth.py
+
+
 # Optional, uncomment to replace
 # find etc -type f -print | xargs sed -i "s/my-django-server/replace-with-another-vps-hostname/g"
 # sed -i "s/mysite/replace-with-another-project-name/g" setup.sh scripts/django_projects.pth scripts/site-reload.sh etc/apache2.conf
+ 
 
 echo "Done. Don't forget to copy your SSH public key, and replace django SECRET_KEY. See README"

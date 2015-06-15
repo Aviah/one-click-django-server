@@ -51,6 +51,8 @@ These are the texts that you should replace (either with the find_replace script
 5. Replace "imnotsecretdjangomysqlpassword" with actual password. This is the password that django will use to access MySQL (files: site_repo/settings.py, scripts/db.sql)
 6. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
 7. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/apache2.conf)
+8. Optional: Replace "apacheusername", "apachepasswd" in scripts/site_auth.py
+
 
 
 ### SSH Public Key:
@@ -124,6 +126,8 @@ From the command line (make sure you are in the one-click-django-server director
 3. site-maintenance: shutsdown apache gracefuly, waits 1 minute, and moves Nginx to a one-page static maintenance html site (maintenance file is /usr/share/nginx/html/index.html)
 4. site-up: restarts apache, and restart Nginx with the django site
 5. site-reload: touches the wsgi file, so mod-wsgi reloads the python code. Useful if only pycode changed, and there is no need to restart Apache
+6. site-auth-on: like site-up, with Apache config that protects the entire site with Apache password. The username and passowrd credentioals are in mysite/site_config/django_auth.py
+7. site-auth-off: like site-up, clears the site password configs in site-auth-on
 
 ## Next Steps:
 

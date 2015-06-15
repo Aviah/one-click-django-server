@@ -81,7 +81,9 @@ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf.orig
 cp /etc/apache2/ports.conf /etc/apache2/ports.conf.orig
 cp etc/nginx.conf /etc/nginx/
-cp etc/apache2.conf /etc/apache2/
+cp etc/apache2.conf.django /etc/apache2/apache2.conf
+cp etc/apache2.conf.django /etc/apache2/
+cp etc/apache2.conf.django.auth /etc/apache2/
 cp etc/ports.conf /etc/apache2/
 cp etc/django-site-nginx /etc/nginx/sites-available/django
 ln -s /etc/nginx/sites-available/django /etc/nginx/sites-enabled/django
