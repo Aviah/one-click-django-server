@@ -21,6 +21,7 @@ TEMPLATE_DIRS = ["%s/templates/"%os.path.dirname(os.path.abspath(__file__))]
 # Static script files (CSS, JavaScript)
 STATIC_URL = '/static/'
 STATIC_ROOT = "%s/static_root/"%BASE_DIR
+STATICFILES_DIRS = ["%s/static/"%os.path.dirname(os.path.abspath(__file__))]
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Site pre-prepared media resources (logo, icons etc)

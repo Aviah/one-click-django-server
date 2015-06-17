@@ -1,7 +1,7 @@
 import logging
 from django.core.cache import cache
 from django.shortcuts import render
-from site_repo.utils import get_ip
+from site_repo.utils.requests import get_ip
 # Create your views here.
 
 main_logger = logging.getLogger('main')

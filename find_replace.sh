@@ -17,7 +17,7 @@ sed -i "s/apachepasswd/replace-with-another-password/g" scripts/site_auth.py
 
 # Optional, uncomment to replace
 # find etc -type f -print | xargs sed -i "s/my-django-server/replace-with-another-vps-hostname/g"
-# sed -i "s/mysite/replace-with-another-project-name/g" setup.sh scripts/django_projects.pth scripts/site-reload.sh etc/apache2.conf
+# sed -i "s/mysite/replace-with-another-project-name/g" setup.sh scripts/django_projects.pth scripts/site-reload.sh etc/apache2.conf.django etc/apache2.conf.django.auth
  
 
 echo "Done. Don't forget to copy your SSH public key, and replace django SECRET_KEY. See README"
