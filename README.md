@@ -6,6 +6,7 @@ A set of scripts to auto install a django website on a single server ubuntu mach
 Tutorial with a real site
 Http
 Re build and try
+simple, on machine, no virtualenv etc
 
 The site is configured for the most common requirments of a django website: 
 1. Web server: Nginx for media, and as a proxy to Apache2 mod-wsgi
@@ -150,6 +151,23 @@ From the command line (make sure you are in the one-click-django-server director
 6. site-auth-on: like site-up, with Apache config that protects the entire site with Apache password. The username and passowrd credentioals are in mysite/site_config/django_auth.py
 7. site-auth-off: like site-up, clears the site password configs in site-auth-on
 
+
+## Development & Deployment
+
+1. Install a similar environment on you dev machine, where the repository is cloned from the server git repository
+2. For one-click install script on an Ubuntu machine, please use the one-click-django-dev scripts. The dev environment scripts were tested on Ubuntu (there is an advantage
+to develop on the same OS you deploy to), but with few adjustments should work on other Linux based (I use VMFusion Ubuntu on a mac, also works great)
+3. Develop the app! 
+4. To import modules in python, use from site_repo. (site_repo was configured with a pth file on the python path)
+5. For javascript, css and images/media see extranl files
+6. Django development server is easier to use during development. Before pushing, it's recommended to test on Nginx/Apache Locally.
+7. Deployment is easy, it's a one server website. Just push the code, run collectstatic on the server if any js/css file changed, and reload the site.
+
+See the one-click-django-dev Readme.
+
+Note: see django docs for deployment
+
+
 ## Next Steps:
 
 1. The django project is saved in the django user home directory on the server. To access the project, ssh as django:
@@ -159,8 +177,10 @@ From the command line (make sure you are in the one-click-django-server director
     '''you@dev-machine$ scp ~/.ssh/id_rsa.pub django@PUB.IP.IP.IP:~/keyname.pub
        you@dev-machine$ ssh django@PUB.IP.IP.IP
        django@my-django-server$ cat keyname.pub >> .ssh/authorized_keys'''
+       
+This user will allow to pull and push code, but without sudo.
 
-3. Staging environment can be set in a similar way, with the same scripts, just replace the IP and the staging domain.
+3. Staging environment: can be set in a similar way, with the same scripts, just replace the IP and the staging domain.
 You will need, however, to modify your git workflow between dev, staging, production
         
 4. The firewall is really basic. Add some advanced and more specific rules, there are many resources on the web, books and iptables
@@ -172,6 +192,18 @@ then add to the settings.py file:
     # to save passwords outside the repository
     # the settings_passwords.py file should exist both in dev and production environment
     from site_config import settings_password.py 
+
+
+6. Mysqldump: mysqldump can be used to save and load database backups and fixtures. For example:
+    Save backup:
+    '''you@server: mysqldump -u django -p djangomysqlpassword --databases django_db --add-drop-database > django_db.bak.sql
+    Load backup:
+    you@server: mysql -u root -p mysqlrootpassword < django_db.bak.sql'''
+
+
+
+7. Backup: Most VPS providers offer a backup (Linode does for additional fees). However, to make sure the database is in a known state,
+during backup, run a mysqldump with a crontab task a few minutes before the shceduled backup.
 
 
 ## The project structure
@@ -201,6 +233,7 @@ This is the server directory. The local dev directory is similar, under the user
         |   |
         |   |- settings_production.py (settings.py will try to import this file, make sure it exists in production)
         |   |- settings_tmp.py (settings.py will try to import this file, useful for ad-hoc settings during dev)
+        |   |- site_auth.py (credentials for password-protected site via Apache auth, if used)
         |
         |- site_repo (this is the actual code repository for your django webapp project)
         |   |
@@ -210,6 +243,11 @@ This is the server directory. The local dev directory is similar, under the user
         |   etc...
         |
         |- static_root (static js & css files, created from the repository with manage.py collectstatic, this dir is not a repository)
+ 
+ 
+## Settings
+
+...
           
   
   
