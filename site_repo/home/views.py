@@ -8,21 +8,28 @@ main_logger = logging.getLogger('main')
 
 def home_page(request):
     
-    template = 'home_page.html'
+    try:
+        template = 'home_page.html'
+        
+        context = {'page_title':'It Works',
+                   'intro':'Hello World!'}    
+        
+        context['ip'] = get_ip(request)
+        
+        # cache
+        cache.set('foo','buz')
     
-    context = {'page_title':'It Works',
-               'intro':'Hello World!'}    
+        # logging
+        main_logger.info("home page, production log")
+        logging.debug("home_page, debug log")
+        request.session['foo'] = 'baz' # a db interaction
+        
+        return render(request,template,context)
     
-    context['ip'] = get_ip(request)
+    except:
+        
+        main_logger.exception("Home page exception")
+        raise
     
-    # cache
-    cache.set('foo','buz')
-
-    # logging
-    main_logger.info("home page, production log")
-    logging.debug("home_page, debug log")
-    request.session['foo'] = 'baz' # a db interaction
-    
-    return render(request,template,context)
     
     
