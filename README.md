@@ -204,12 +204,18 @@ For external files expire date and browser cache see "Webservers"
         
 ### Script files (JS,CSS):
 
-1. During development, set DEBUG=True, and work on the static files in the repository, at site_repo/static
-2. Files will be available in 127.0.0.1:8000 in django dev server (manage.py runserver)
+1. During development, set DEBUG=True, and work on the static files in the repository, at my_site/site_repo/static. Changes you make
+to the files are reflected in site.
+2. Files will be available in 127.0.0.1:8000 in django dev server (manage.py runserver), when DEBUG=True.
 3. Refernces to the js,css files in the templates should use the "static" template tag (see base.html)
-4. In production, or production testing, after changes to static files, run "manage.py collectstatic", then restart Apache
-5. Files will be avaialble for the site, in the static_root directory, served directly by Nginx (by a location alias config)
+4. In production, DEBUG=False, and files are served directly by Nginx from the STATIC_ROOT directory (mysite/static_root) with Nginx's location alias.
+5. To see changes made to static files when DEBUG=False, you must run from the mysite directory:
+    '''you@dev-or-production-machine: python manage.py collectstatic'''
+6. For testing, sometimes debugging, it's handy to use Nginx/Apache with DEBUG=True. In this case, files are served from the repository static directory by django (my_site/site_repo/static).
 
+Summary: Edit and work on static files when DEBUG=True, once everything works, run collectstatic and test with Nginx/Apache with DEBUG=False, then deploy.
+
+Note: django development server will not serve static files when DEBUG=False
 Note: django also supports serving static files from an application's  directory, see django docs
 Note: django will pick any other static resource using the "static" url or directory. However, for non js, css, it helps to use different URL and directory, as follows.
 
@@ -231,6 +237,15 @@ example: ```you@dev-machine: scp logo.png django@PUB.IP.IP.IP:~/mysite/media_res
 2. Uploads are configured with MEDIA_URL and MEDIA_ROOT, django's settings for uploaded files, see django docs
 3. For complete info about uploads see django docs. This project config respects django default to use MEDIA_URL and MEDIA_ROOT for uploads.
 
+
+## Scripts and media files deloyment:
+
+1. Commit and push the site_repo code
+2. Run collectstatic on the server
+3. scp images, icons etc to mysite/media_resources/
+4. Reload site
+
+Note: This deployment assumes one webserver, see django docs
 
 ## Templates:
 
