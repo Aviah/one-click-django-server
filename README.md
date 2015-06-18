@@ -1,23 +1,26 @@
 # one-click-django-server
 A set of scripts to auto install a django website on a single server ubuntu machine
+
+
+## Intro
+Tutorial with a real site
+Http
+Re build and try
+
 The site is configured for the most common requirments of a django website: 
 1. Web server: Nginx for media, and as a proxy to Apache2 mod-wsgi
 2. Database: MySql
 3. Basic iptables firewall
 4. Initial project directories and files
 5. Git repository
-6. Django configuration for media & static files
-7. Django logging, debug log and production log
-8. Django file based cache
-9. Optional password protect the site with Apache auth
-10. Switching to and from a maintenance page
+6. Django production and development settings
+7. Django configuration for media & static files
+8. Django logging, debug log and production log
+9. Django file based cache
+10. Optional password protect the site with Apache auth
+11. Switching to and from a maintenance page
 
 There are also a few useful command line aliases (site-up, site-maintenance, firewall-up etc)
-
-## Intro
-Tutorial with a real site
-Http
-Re build and try
 
 
 ## Prep:
