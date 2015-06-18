@@ -37,7 +37,7 @@ server {
 	}
 	
 	location  /static { 
-	alias /home/aviah/myprojects/mysite/static_root;
+	alias /home/django/mysite/static_root;
 	expires 180d;
 	gzip on;
 	gzip_types text/css application/x-javascript;
@@ -45,7 +45,7 @@ server {
 	} 
 	
 	location /media {
-	alias /home/aviah/myprojects/mysite/media_resources;
+	alias /home/django/mysite/media_resources;
 	expires 180d;
 	gzip off;
 
@@ -53,7 +53,7 @@ server {
 
 
 	location /uploads {
-	alias /home/aviah/myprojects/mysite/media_uploads;
+	alias /home/django/mysite/media_uploads;
 	expires 180d;
 	gzip off;
 
