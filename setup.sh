@@ -63,6 +63,7 @@ mkdir /home/django/$SITEPROJECTNAME/site_config
 touch /home/django/$SITEPROJECTNAME/site_config/__init__.py
 cp site_repo/settings_production.py /home/django/$SITEPROJECTNAME/site_config/
 cp scripts/settings_tmp.py /home/django/$SITEPROJECTNAME/site_config/
+cp scripts/site_auth.py /home/django/$SITEPROJECTNAME/site_config/
 mkdir /home/django/$SITEPROJECTNAME/logs
 touch /home/django/$SITEPROJECTNAME/logs/main.log
 touch /home/django/$SITEPROJECTNAME/logs/debug.log
