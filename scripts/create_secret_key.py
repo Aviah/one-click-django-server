@@ -39,4 +39,8 @@ def get_random_string(length,allowed_chars,seed_input):
 
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+print
+print "Copy the following string and paste it to site_repo/settings.py to SECERET_KEY:"
+print
 print get_random_string(50, chars,sys.argv[1])
+print
