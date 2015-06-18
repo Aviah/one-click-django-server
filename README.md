@@ -95,8 +95,13 @@ These are the texts that you should replace (either with the find_replace script
 ## Install
 ** Only after prep: text was replaced, id_rsa.pub was copied, SECRET_KEY changed **
 
-* During installation you will be asked to provide four passwords: your linux user password (with sudo), django linux user (no sudo), 
-mysql root password and django site superuser ('root') password. Better to prepare these passwords beforehand *
+* During installation you will be asked to create the following passwords (better to prepare these passwords beforehand 
+):
+- your linux user password (with sudo)
+- django user linux user (no sudo) 
+- mysql root password
+- django site superuser ('root') password.
+
 
 From the command line (make sure you are in the one-click-django-server directory):
 
