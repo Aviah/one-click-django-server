@@ -7,6 +7,9 @@ Tutorial with a real site
 Http
 Re build and try
 simple, on machine, no virtualenv etc
+install everyrhing ssh, iptables etc
+new  to dj - tracer bullets
+experienced - just an easy way to start, up and running
 
 The site is configured for the most common requirments of a django website: 
 1. Web server: Nginx for media, and as a proxy to Apache2 mod-wsgi
