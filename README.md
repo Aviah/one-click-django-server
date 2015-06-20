@@ -320,11 +320,12 @@ Note: django also supports serving templates from an application's  directory, s
 
 1. Logs are saved to the project logs/ directory
 2. For dev, set DEBUG_LOG=True, and use logging.debug('debug msg'), which logs to mysite/logs/debug.log, when DEBUG_LOG=True
-3. For prodution, use logging.getLogger('main').info('production msg'), which logs to mysite/logs/main.log when log level >= info.
-4. During development, it's easy to work only with debug.log, which also gets both debug and the 'main' logger,
-so everything is in one place.
-5. On production, just set DEBUG_LOG=False, unless debug logging is required to debug something on the server.
-6. Django can automatically log all db transactions. This feature is really handy during development, but a preformance issue on production.
+3. For production, use logging.getLogger('main').info('production msg'), which logs to mysite/logs/main.log when log level >= info.
+4. The debug log is configured as root log, so it can be used without getLogger, only logging.debug. 
+5. During development, it's easy to work only with debug.log, which also gets both debug and the 'main' logger,
+so everything is in one place. The debug logs said which message was logged to debug (root), and which was propagated from main.
+6. On production, just set DEBUG_LOG=False, unless debug logging is required to debug something on the server.
+7. Django can automatically log all db transactions. This feature is really handy during development, but a preformance issue on production.
 To use this logger set DEBUG_DB_LOG=True. If also DEBUG=True, the db activity is logged to mysite/logs/debug_db.log.
 
 Note: django provides many other loggers and options, see docs.

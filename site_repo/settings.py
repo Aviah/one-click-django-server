@@ -184,6 +184,14 @@ class RequireDebugDBLogTrue(logging.Filter):
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters':{
+        'standard':{
+            'format':'%(asctime)s [%(levelname)s]: %(message)s'
+            },
+        'debug':{
+            'format':'%(asctime)s %(name)s [%(levelname)s]: %(message)s'
+        }          
+    },    
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse',
@@ -206,6 +214,7 @@ LOGGING = {
             'filename': "%s/logs/debug.log"%BASE_DIR,
             'maxBytes': 1024*1024*5,
             'backupCount':7,
+            'formatter':'debug',
             },
         'main': {
             'level': 'INFO',
@@ -213,6 +222,7 @@ LOGGING = {
             'filename': "%s/logs/main.log"%BASE_DIR,
             'maxBytes': 1024*1024*5,
             'backupCount':7,
+            'formatter':'standard',
             },
         'django_db': {
             'level': 'DEBUG',
@@ -221,6 +231,7 @@ LOGGING = {
             'filename': "%s/logs/debug_db.log"%BASE_DIR,
             'maxBytes': 1024*1024*5,
             'backupCount':7,
+            'formatter':'standard',
             },        
         'console': {
             'level': 'INFO',
