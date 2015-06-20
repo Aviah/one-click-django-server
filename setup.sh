@@ -25,6 +25,7 @@ cp etc/ip6tables.rules.firewall /etc/ip6tables.rules.firewall.orig
 # command line scripts
 cp scripts/firewall*.sh /usr/local/bin/
 cp scripts/site*.sh /usr/local/bin/
+cp scripts/tail-logs.sh /usr/local/bin/
 
 # add sudo user with ssh access
 echo ">>> Adding **YOUR** user"

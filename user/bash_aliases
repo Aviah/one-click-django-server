@@ -5,4 +5,5 @@ alias site-maintenance='sudo /usr/local/bin/./site-maintenance.sh'
 alias site-reload='sudo /usr/local/bin/./site-reload.sh'
 alias site-auth-on='sudo /usr/local/bin/./site-auth-on.sh'
 alias site-auth-off='sudo /usr/local/bin/./site-auth-off.sh'
+alias tail-logs='sudo /usr/local/bin/./tail-logs.sh'
 

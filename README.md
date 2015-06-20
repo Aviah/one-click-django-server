@@ -153,6 +153,7 @@ From the command line (make sure you are in the one-click-django-server director
 5. site-reload: touches the wsgi file, so mod-wsgi reloads the python code. Useful if only pycode changed, and there is no need to restart Apache
 6. site-auth-on: like site-up, with Apache config that protects the entire site with Apache password. The username and passowrd credentioals are in mysite/site_config/django_auth.py
 7. site-auth-off: like site-up, clears the site password configs in site-auth-on
+8. tail-logs: tails main.log, debug.log, Apache error.log
 
 
 ## Development & Deployment
