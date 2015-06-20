@@ -10,6 +10,7 @@ simple, on machine, no virtualenv etc
 install everyrhing ssh, iptables etc
 new  to dj - tracer bullets
 experienced - just an easy way to start, up and running
+rebuils, known hosts
 
 The site is configured for the most common requirments of a django website: 
 1. Web server: Nginx for media, and as a proxy to Apache2 mod-wsgi
@@ -253,6 +254,11 @@ This is the server directory. The local dev directory is similar, under the user
 
 ...
           
+  
+## Django administration
+
+..., change the admin url...
+
   
   
 ## Extrnal files: JS, CSS, images  

@@ -28,7 +28,7 @@ cp scripts/site*.sh /usr/local/bin/
 cp scripts/tail-logs.sh /usr/local/bin/
 
 # add sudo user with ssh access
-echo ">>> Adding **YOUR** user"
+echo ">>> Adding **YOUR** user account (with sudo)"
 echo "[press any key to continue]"
 read dummy
 adduser --shell /bin/bash $USERNAME
@@ -48,7 +48,7 @@ apt-get update
 # django site
 apt-get install python-pip
 pip install Django==1.8.1
-echo ">>> Adding **django** user (another password please)"
+echo ">>> Adding **django** user account(another password please)"
 echo "[press any key to continue]"
 read dummy
 adduser --shell /bin/bash django
@@ -136,6 +136,8 @@ chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 
 # Init site
 /home/django/mysite/manage.py migrate
+echo ">>> Adding django site superuser (access to the site django administration)"
+echo "[press any key to continue]"
 /home/django/mysite/manage.py createsuperuser
 /home/django/mysite/manage.py collectstatic
 chown -R django:www-data /home/django/
