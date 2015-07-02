@@ -166,7 +166,8 @@ to develop on the same OS you deploy to), but with few adjustments should work o
 4. To import modules in python, use from site_repo. (site_repo was configured with a pth file on the python path)
 5. For javascript, css and images/media see extranl files
 6. Django development server is easier to use during development. Before pushing, it's recommended to test on Nginx/Apache Locally.
-7. Deployment is easy, it's a one server website. Just push the code, run collectstatic on the server if any js/css file changed, and reload the site.
+7. Deployment is easy, it's a one server website. Just push the code, run collectstatic on the server if any js/css file changed, run migrate on server if db schema changed,
+and reload the site. If migrate is required, moving to maintenance is recommended, and then site-up. 
 
 See the one-click-django-dev Readme.
 
@@ -280,8 +281,7 @@ to the files are reflected in site.
 4. In production, DEBUG=False, and files are served directly by Nginx from the STATIC_ROOT directory (mysite/static_root) with Nginx's location alias.
 5. To see changes made to static files when DEBUG=False, you must run from the mysite directory:
     '''you@dev-or-production-machine: python manage.py collectstatic'''
-6. For testing, sometimes debugging, it's handy to use Nginx/Apache with DEBUG=True. In this case, files are served from the repository static directory by django (my_site/site_repo/static).
-
+6. For testing, sometimes debugging, it's handy to use Nginx/Apache with DEBUG=True. In this case, files are served by Nginx from static_root, but with the original file name, rather than the hashed name added by collectstatic
 Summary: Edit and work on static files when DEBUG=True, once everything works, run collectstatic and test with Nginx/Apache with DEBUG=False, then deploy.
 
 Note: django development server will not serve static files when DEBUG=False

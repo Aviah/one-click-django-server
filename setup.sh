@@ -138,6 +138,7 @@ chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 /home/django/mysite/manage.py migrate
 echo ">>> Adding django site superuser (access to the site django administration)"
 echo "[press any key to continue]"
+read dummy
 /home/django/mysite/manage.py createsuperuser
 /home/django/mysite/manage.py collectstatic
 chown -R django:www-data /home/django/
