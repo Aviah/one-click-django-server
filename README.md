@@ -179,12 +179,13 @@ Note: see django docs for deployment
 1. The django project is saved in the django user home directory on the server. To access the project, ssh as django:
     'you@dev-machine: ssh django@PUB.IP.IP.IP'
 
-2. To add people, or dev machines, simply add the public ssh key to the django user authorized keys:
+2. To add site access to people, or dev machines, simply add the public ssh key to the django user authorized keys:
     '''you@dev-machine$ scp ~/.ssh/id_rsa.pub django@PUB.IP.IP.IP:~/keyname.pub
        you@dev-machine$ ssh django@PUB.IP.IP.IP
        django@my-django-server$ cat keyname.pub >> .ssh/authorized_keys'''
        
-This user will allow to pull and push code, but without sudo.
+Any user that is added to the server's django user will have access to the site directories, logs, etc, and 
+will be able to pull and push code to the repo. However, without sudo.
 
 3. Staging environment: can be set in a similar way, with the same scripts, just replace the IP and the staging domain.
 You will need, however, to modify your git workflow between dev, staging, production
@@ -192,12 +193,10 @@ You will need, however, to modify your git workflow between dev, staging, produc
 4. The firewall is really basic. Add some advanced and more specific rules, there are many resources on the web, books and iptables
 docs.
 
-5. If you want to save passwords, secret key etc outside the repository, use site_config directory. E.g, add a file like settings_password.py to mysite/site_config.
-then add to the settings.py file:
-
-    # to save passwords outside the repository
-    # the settings_passwords.py file should exist both in dev and production environment
-    from site_config import settings_password.py 
+5. If you want to save passwords, secret key etc outside the repository, use site_config directory, move them to the site_config/secrets.py
+file. 
+Note: If the secret was commited in previous versions, it is still accessible to anybody who can access the repo (e.g. on github).
+So the best solution is to use new secrets altogether, and save those secrets on site_config/secrets.py, without previous commits.
 
 
 6. Mysqldump: mysqldump can be used to save and load database backups and fixtures. For example:
