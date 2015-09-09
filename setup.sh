@@ -58,7 +58,7 @@ cp scripts/manage.py /home/django/$SITEPROJECTNAME/
 mkdir /home/django/$SITEPROJECTNAME/static_root
 mkdir /home/django/$SITEPROJECTNAME/media_resources
 mkdir /home/django/$SITEPROJECTNAME/media_uploads
-cp images/favicon.ico images/django-pony.jpg  /home/django/$SITEPROJECTNAME/media_resources/
+cp images/favicon.ico images/powered-by-django.gif  /home/django/$SITEPROJECTNAME/media_resources/
 cp images/avatar.png /home/django/$SITEPROJECTNAME/media_uploads/
 mkdir /home/django/$SITEPROJECTNAME/site_config
 touch /home/django/$SITEPROJECTNAME/site_config/__init__.py
