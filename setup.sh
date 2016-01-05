@@ -29,7 +29,7 @@ cp scripts/tail-logs.sh /usr/local/bin/
 
 # add sudo user with ssh access
 echo ">>> Adding **YOUR** user account (with sudo)"
-echo "[press any key to continue]"
+echo "[Press ENTER to continue]"
 read dummy
 adduser --shell /bin/bash $USERNAME
 usermod -a -G sudo $USERNAME
@@ -49,7 +49,7 @@ apt-get update
 apt-get install python-pip
 pip install Django==1.8.7
 echo ">>> Adding **django** user account(another password please)"
-echo "[press any key to continue]"
+echo "[Press ENTER to continue]"
 read dummy
 adduser --shell /bin/bash django
 usermod -g www-data -G www-data,django,sshgroup django
@@ -102,13 +102,13 @@ service apache2 restart
 
 # Database
 echo; echo ">>> During the follwing MySQL installation, you will be asked to enter the MySQL root password."
-echo ">>> Select a strong password, and rememeber it, you will need it soon! (press any key to continue)"
-echo "[press any key to continue]"
+echo ">>> Select a strong password, and rememeber it, you will need it soon! (Press ENTER to continue)"
+echo "[Press ENTER to continue]"
 read dummy
 apt-get install mysql-server mysql-client
 echo; echo ">>> Running mysql_secure_installation. If the root password you just entered is strong, you don't need to change it"
 echo ">>> For the rest of the options, select the defaults"
-echo "[press any key to continue]"
+echo "[Press ENTER to continue]"
 read dummy
 mysql_secure_installation
 cp /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
@@ -140,7 +140,7 @@ chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 # Init site
 /home/django/mysite/manage.py migrate
 echo ">>> Adding django site superuser (access to the site django administration)"
-echo "[press any key to continue]"
+echo "[Press ENTER to continue]"
 read dummy
 /home/django/mysite/manage.py createsuperuser
 /home/django/mysite/manage.py collectstatic
