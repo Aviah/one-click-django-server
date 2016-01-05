@@ -23,7 +23,7 @@ SECRET_KEY = 'I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# Change in settings_production
+# Change this in settings_production
 ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 # Application definition
