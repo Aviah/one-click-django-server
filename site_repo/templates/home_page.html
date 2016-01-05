@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% load static from staticfiles %}
+
+
 {% block body %}
 
     <div class="content">
-        <h1> {{ intro }} </h1> 
+        <h1> {{ intro }} </h1>
         <p> Your IP is {{ ip }} </p>
         <p> DEBUG is {{ is_debug }} </p>
     </div>
@@ -15,9 +18,9 @@
     </div>
     
     <div class="content">
-        <h3> Image from media resources: </h3>
+        <h3> Image from static files: </h3>
         <p> Directory for the site pre-prepared, optimized media (e.g. logo, favicon, icons)</p>
-        <img src="{{ MEDIA_RES_URL }}powered-by-django.gif ">
+        <img src="{% static 'powered-by-django.gif' %}">
     </div>
     
     <div class="content">
@@ -27,7 +30,7 @@
     </div>
     
     
-    
+<p> The site is powered by {{ DJANGO_VER }}  </p>    
 
 
 {% endblock body %}

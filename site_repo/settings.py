@@ -62,7 +62,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'site_repo.django_add.context_processors.media_res',                
+                'site_repo.django_add.context_processors.custom_context',                
             ],
         },
     },
@@ -104,12 +104,10 @@ USE_TZ = True
 # CSS, JavaScript
 STATIC_URL = '/static/'
 STATIC_ROOT = "%s/static_root/"%BASE_DIR
-STATICFILES_DIRS = ["%s/static/"%REPO_DIR]
+STATICFILES_DIRS = ["%s/static/"%REPO_DIR,
+                    "%s/media_resources/"%BASE_DIR]
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-# Site Images
-MEDIA_RES_URL = '/media/'
-MEDIA_RES_ROOT = "%s/media_resources/"%BASE_DIR
 
 # Users' Uploads 
 MEDIA_URL = '/uploads/'

@@ -44,14 +44,7 @@ server {
 
 	} 
 	
-	location /media {
-	alias /home/django/mysite/media_resources;
-	expires 180d;
-	gzip off;
-
-	}
-
-
+	
 	location /uploads {
 	alias /home/django/mysite/media_uploads;
 	expires 180d;

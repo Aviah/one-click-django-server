@@ -19,7 +19,7 @@ def home_page(request):
         context['is_debug'] = settings.DEBUG
         
         # cache
-        cache.set('foo','buz')
+        cache.set('foo','baz')
     
         # logging
         main_logger.info("home page, production log")

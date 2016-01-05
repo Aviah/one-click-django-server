@@ -1,10 +1,7 @@
 # custom context processors
 
-from django.conf import settings
-
-def media_res(request):
+def custom_context(request):
     """
-    Adds media-related context variables to the context.
-
+    Custom items that are available to the templates
     """
-    return {'MEDIA_RES_URL': settings.MEDIA_RES_URL}
+    return {'DJANGO_VER': 'django 1.8.7 LTS'}
