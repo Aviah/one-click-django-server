@@ -1,3 +1,5 @@
+#Production Settings
+
 DEBUG = False
 ALLOWED_HOSTS = ['.example.com']
 DEBUG_LOG = False

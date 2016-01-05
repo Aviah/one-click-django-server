@@ -47,7 +47,7 @@ apt-get update
 
 # django site
 apt-get install python-pip
-pip install Django==1.8.1
+pip install Django==1.8.7
 echo ">>> Adding **django** user account(another password please)"
 echo "[press any key to continue]"
 read dummy
@@ -132,6 +132,8 @@ git commit -m 'init site repository'
 cd ..
 git clone --bare site_repo /home/django/site_repo.git
 git clone  /home/django/site_repo.git /home/django/$SITEPROJECTNAME/site_repo/
+git --git-dir=/home/django/site_repo.git/.git remote rm origin
+git --git-dir=/home/django/$SITEPROJECTNAME/site_repo/.git remote rm origin
 chown -R django:django /home/django/site_repo.git
 chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 

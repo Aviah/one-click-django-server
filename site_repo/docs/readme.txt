@@ -1,1 +1,1 @@
-Project documentation
+Use this directory for documentation

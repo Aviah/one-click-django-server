@@ -14,13 +14,13 @@ sed -i "s/imnotsecretdjangomysqlpassword/abcdqwertypwd/g" site_repo/settings.py 
 find etc site_repo -type f -print | xargs sed -i "s/example.com/foobar.com/g"
 
 # Entire site Apache password (uncomment to change)
-# sed -i "s/apacheusername/webmaster/g" scripts/site_auth.py
-# sed -i "s/apachepasswd/abcasdfgpwd/g" scripts/site_auth.py
+sed -i "s/apacheusername/webmaster/g" scripts/site_auth.py
+sed -i "s/apachepasswd/abcasdfgpwd/g" scripts/site_auth.py
 
 
 # Optional, uncomment to replace (uncomment to change)
-# find etc -type f -print | xargs sed -i "s/my-django-server/django-vps/g"
-# sed -i "s/mysite/cms_site/g" setup.sh scripts/django_projects.pth scripts/site-reload.sh scripts/tail-logs.sh etc/apache2.conf.django etc/apache2.conf.django.auth etc/django-site-nginx
+find etc -type f -print | xargs sed -i "s/my-django-server/django-vps/g"
+sed -i "s/mysite/cms_site/g" setup.sh scripts/django_projects.pth scripts/site-reload.sh scripts/tail-logs.sh etc/apache2.conf.django etc/apache2.conf.django.auth etc/django-site-nginx
  
 
 echo "Done. Don't forget to copy your SSH public key, and replace django SECRET_KEY. See README"

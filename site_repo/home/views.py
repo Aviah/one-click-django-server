@@ -1,4 +1,5 @@
 import logging
+from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render
 from site_repo.utils.requests import get_ip
@@ -15,6 +16,7 @@ def home_page(request):
                    'intro':'Hello World!'}    
         
         context['ip'] = get_ip(request)
+        context['is_debug'] = settings.DEBUG
         
         # cache
         cache.set('foo','buz')
