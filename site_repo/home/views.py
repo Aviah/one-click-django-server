@@ -22,8 +22,8 @@ def home_page(request):
         cache.set('foo','baz')
     
         # logging
-        main_logger.info("home page, production log")
-        logging.debug("home_page, debug log")
+        main_logger.info("log msg from home_page to main log, also logs to debug log")
+        logging.debug("log msg from home_page to debug log")
         request.session['foo'] = 'baz' # a db interaction
         
         return render(request,template,context)
