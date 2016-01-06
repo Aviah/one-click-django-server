@@ -134,6 +134,7 @@ git clone --bare site_repo /home/django/site_repo.git
 git clone  /home/django/site_repo.git /home/django/$SITEPROJECTNAME/site_repo/
 git --git-dir=/home/django/site_repo.git/.git remote rm origin
 git --git-dir=/home/django/$SITEPROJECTNAME/site_repo/.git remote rm origin
+git --git-dir=/home/django/$SITEPROJECTNAME/site_repo/.git config receive.denyCurrentBranch ignore
 chown -R django:django /home/django/site_repo.git
 chown -R django:www-data /home/django/$SITEPROJECTNAME/site_repo
 
