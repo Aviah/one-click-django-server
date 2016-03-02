@@ -98,8 +98,6 @@ ln -s /etc/apache2/sites-available/django /etc/apache2/sites-enabled/django
 rm /etc/apache2/sites-enabled/000-default.conf
 cp /usr/share/nginx/html/index.html /usr/share/nginx/html/index.html.orig
 cp scripts/maintenance_page.html /usr/share/nginx/html/index.html
-service apache2 restart
-service nginx restart
 
 # Database
 echo; echo ">>> During the follwing MySQL installation, you will be asked to enter the MySQL root password."
@@ -147,6 +145,10 @@ read dummy
 /home/django/mysite/manage.py createsuperuser
 /home/django/mysite/manage.py collectstatic
 chown -R django:www-data /home/django/
+
+service apache2 restart
+service nginx restart
+
 
 echo "Woohoo! Done. Reboot the machine. If everything is OK, you should be able to visit the site in your browser"
 echo "Once everything works, uncomment the ip6tables firewall rules, see README"
