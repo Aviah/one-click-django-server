@@ -2,7 +2,7 @@
 *.wpr
 *.wpu
 
-.DS_Store
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -20,7 +20,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 sdist/
