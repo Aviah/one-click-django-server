@@ -1,356 +1,340 @@
-# one-click-django-server
-A set of scripts to auto install a django website on a single server ubuntu machine
+# One-click-django-server
+###A set of scripts to auto install a complete single-server django website
 
 
-## Intro
-Tutorial with a real site
-Http
-Re build and try
-simple, on machine, no virtualenv etc
-install everyrhing ssh, iptables etc
-new  to dj - tracer bullets
-experienced - just an easy way to start, up and running
-rebuils, known hosts
+## Why?
 
-The site is configured for the most common requirments of a django website: 
-1. Web server: Nginx for media, and as a proxy to Apache2 mod-wsgi
-2. Database: MySql
-3. Basic iptables firewall
-4. Initial project directories and files
-5. Git repository
-6. Django production and development settings
-7. Django configuration for media & static files
-8. Django logging, debug log and production log
-9. Django file based cache
-10. Optional password protect the site with Apache auth
-11. Switching to and from a maintenance page
+Tutorials usually start with a local website. But it's often more useful, and more fun, to see a real working website ASAP. With a real website you see something working early, you get a better feel for the progress, and you have something to demonstrate.  
+  
+The following scripts allow you to (almost) automatically install a working django server. Together with the matching auto-install development environment, you get a complete development, deployment and production environment, without messing too much with configuration.
 
-There are also a few useful command line aliases (site-up, site-maintenance, firewall-up etc)
+Once installed, it's easy to continue with any django tutorial, and instantly deploy to a real website. It's also a great way to learn a bit about deployment and some of django's settings quirks.
+
+For the seasoned django developer, it's an easy way to have a new django website up and running, quickly.
 
 
-## Prep:
+## How?
 
-### Overview:
-1. Buy a domain!
-2. Setup a VPS (see "Setup a VPS")
-3. Donwload the one-click-django-server files to your local machine (you don't need to clone a repository, just the files)
-4. Use "find & replace" to change specific bits in the files (see "Text to Replace")
-5. Copy your actual ssh public-key file (see "SSH Public Key")
-6. Change the django SECRET_KEY string (see "Change the django SECRET_KEY")
+Buy a domain, and sign-up for a Linux-Ubuntu VPS. 
 
+Download the one-click-django-server files.
 
-### Setup a VPS
+Edit some config files with the actual IP of your VPS, your username, domain name etc (there is a script for that). 
 
-1. Sign up for a VPS. For a starter django site, the cheapest VPS is OK 
-2. Build the VPS OS with Ubuntu 14.04 LTS 
-3. Point the domain nameserver records on your domain registrar account to the VPS provider nameservers
-4. Add a DNS record for your domain & VPS 
+Upload the files to your VPS with scp, then run the setup script. After the setup script finishes, reboot the server. The website should work!
+Check it in a browser.
 
-*Note: These scripts were tested on an Ubuntu 14.04 Linode 1GB VPS*
-If you sign-up with Linode:
-1. Build the VPS OS: "Rebuild", select Ubuntu 14.04 LTS & root password, then click "Rebuild"
-2. Set the domain nameserver on domain registrar account to ns1.linode.com, ns2.linode.com ... ns5.linode.com
-3. Add DNS record: Select "DNS Manager" >> "Add a domain zone" >> enter domain, enter email, select VPS, click "Add a master zone"
+**So with these setup scripts you should have a single server django website, development environment, and a streamlined simple deployment.** 
 
-If you use other VPS provider, see their docs, these steps should be fairly simple also.
+Following are the steps.
 
+## Tutorial
 
-### Text to Replace:
-Edit the scripts with your site specific info such as IP, domain, username etc.
-Simply edit and run the find_replace.sh script: 
-    
-    ```you@dev-machine$ nano find_replace.sh
-    you@dev-machine$ ./find_replace.sh```
-    
+If you are new to django, there is also a tutorial!   
+ 
+It's built on the official django polls tutorial, but here you learn on this real development-production environemnt. This version of the official polls tutorial includes working with git, deployment, and basic server troubleshooting.   
 
-These are the texts that you should replace (either with the find_replace script, or a text editor):
+So you will have the polls app working on a real website, at **www.yourdomain.com/polls**!
 
-1. Replace "PUB.IP.IP.IP" with the actual VPS Public IP (files: etc/hosts, etc/interfaces, etc/django-site-nginx)
-2. Replace "GET.IP.IP.IP" with" the actual VPS Getaway IP (files: etc/interfaces)
-3. Replace "myusername" with your actual username (files: setup.sh)
-4. Replace "example.com" with your actual domain (files: etc/hosts, site_repo/settings_production.py, etc/django-site-apache, etc/django-site-nginx)
-5. Replace "imnotsecretdjangomysqlpassword" with actual password. This is the password that django will use to access MySQL (files: site_repo/settings.py, scripts/db.sql)
-6. Optional: Replace "my-django-server" with another hostname (files: etc/hostname, etc/hosts)
-7. Optional: Replace "mysite" with another projectname (files: setup.sh, scripts/django_projects.pth,etc/apache2.conf.django,etc/apache2.conf.django.auth,etc/site-django-nginx)
-8. Optional: Replace "apacheusername", "apachepasswd" in scripts/site_auth.py
+## A Few Details
+
+  
+**Server:**  Everything is tested on an Ubuntu 14.04 LTS, on a Linode VPS. The script installs and configures a single-server django 1.8.7 LTS website, with MySQL, Nginx, and Apache with mod_wsgi.
+
+**VPS:** Any Ubuntu VPS will do. I use Linode, which is great: $10 a month give you a decent VPS with full management dashboard and excellent support. However, any other Ubuntu VPS should work.    
+ If you decide to use Linode and wish to support the this work, please consider to sign-up with my affiliate link.
+
+To support this project with affiliate link:| 
+-|
+https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
+
+  
+**Development Environment:** First auto-install the server, then auto-install the matching development & deployment with one-click-django-dev, avialable for OSX El-Capitan or Ubuntu 14.04 Trusty (Ubuntu on a virtual machine will do for Windows).
+
+*Note: For simplicity, it's a single server configuration. Everything is installed on one VPS. Also, no virtualenv, one domain per server, etc. Eventaully you will have to deal with more complex configurations, but this single server VPS can take you a long way.*
 
 
 
-### SSH Public Key:
+## Whats' Included
+
+
+The one-click-django project configuration includes:
+
+1. Basic Ubuntu Linux server configs: basic iptables firewall, users, ssh
+1. Web server: Nginx for static files & media, and a proxy to Apache mod-wsgi
+1. Database: MySQL
+1. Initial project directories and files
+1. Git repositories
+1. Production settings, development settings
+1. Static files & media
+1. Logging, debug log, production log
+1. Django's file based cache
+1. Exceptions logging middleware
+1. Optional password protect the site with Apache auth
+1. Deployment with fabric, and the required fabfile
+1. Maintenance page
+1. A few scripts and bash aliases for common tasks
+1. Favicon
+
+
+
+## Installation Prep
+
+#### Overview:
+** Step 1: Buy a domain**  
+** Step 2: Sign-up for a VPS **  
+** Step 3: Download & prepare the config files **  
+** Step 4: Add your ssh *public* key**  
+** Step 5: Save a new django secret key**  
+** Step 6: Prepare server passwords**
+
+
+####Isn't all this a bit fancy for a "one click"?
+Good question, but actually not. In a nutshell, all you have to do is to sign-up for a VPS, buy a domain, run a local script that updates the config files with your specific ip,domain,username etc, and then upload the files to the vps and run the server setup script.
+
+
+
+#### Step 1: Buy a domain
+
+1. Buy a domain
+2. Point the domain name-servers records (DNS settings) on your domain registrar account to the VPS provider name-servers
+
+
+#### Step 2: Setup a VPS
+
+1. Sign up for a VPS. For a starter django site, the cheapest Linux VPS is OK
+2. Build the VPS with Ubuntu 14.04 LTS
+3. Add a DNS record for your domain & VPS
+
+  
+If you are using Linode:
+
+
+>These scripts were tested on a Linode VPS, which I use, so here are the steps for Linode (other VPS providers should have similar options):
+
+>+ Sign-in to Linode, select the VPS from "Linodes"
++ Select "Rebuild", select Ubuntu 14.04 LTS, enter the root password (keep it), click "Rebuild"
++ Set the domain name server on your domain registrar account to ns1.linode.com, ns2.linode.com ... ns5.linode.com
++ In Linode, Select "DNS Manager" >> "Add a domain zone". Enter your domain, enter email, select the VPS, click "Add a master zone"
++ Select "Remote Access" to see the VPS ip and it's gateaway IP.
+
+> To support this project consider to sign-up to Linode with my affiliate link: https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46
+
+
+
+
+#### Step 3: Download & prepare the config files
+
+1. Download the one-click-django-server files from Github. You don't need to clone a repo,
+just the files.
+
+2. Open a command line, and cd to the one-click-django-server directory
+
+       you@dev-machine$ cd one-click-django-server
+       
+3. Edit find_replace.sh with your actual ip, username etc:
+
+       you@dev-machine$ nano find_replace.sh
+
+	
+	In the editor, replace the items that start with "replace-with…" with your actual data.
+	
+	So when you see a line like this: 
+		
+		sed -i "s/myusername/replace-with-your-username/g" setup.sh
+			
+	The edited line should look like the following:
+	
+		sed -i "s/myusername/john/g" setup.sh
+	
+	To see an example of a fully edited file, see find_replace.example (saved in the same directory of find_replace.sh).
+	
+	These are the items to edit in find_replace.sh:
+
+
+	Item to replace | Replace with
+----------------| ------------  
+"replace-with-actual-vps-ip" | The actual VPS Public IP
+"replace-with-actual-vps-getaway-ip" | The actual VPS Getaway IP
+"myusername" | Your actual Linux username
+"example.com" | The actual domain (don't use www, just domain.com)
+"imnotsecretdjangomysqlpassword" | Actual password. This will be the password that django uses to access MySQL
+Optional: "my-django-server" | The server hostname
+Optional: "mysite" | The django website project name
+Optional: "apacheusername" | Username for Apache auth, used when the site is password protected
+Optional: "apachepasswd"  | Password for Apache auth, used when the site is password protected
+
+	*Note: To change Optional items, you have to edit **and** uncomment the line*  
+	
+	
+
+
+       
+       
+4. Run find_replace.sh. After you finished edit find_replace.sh, exit the editor and run the script:
+
+       you@dev-machine$ ./find_replace.sh
+       
+
+
+
+#### Step 4: Add your ssh public key
 
 1. From the command line (make sure you are in the one-click-django-server directory):
 
-    `you@dev-machine$ cp ~/.ssh/id_rsa.pub user/`
+        you@dev-machine$ cp ~/.ssh/id_rsa.pub user/
+2. Backup known_hosts, in case you will want to re-build the VPS and run everything again on the same VPS:
 
-2. Backup known_hosts (in case you want to re-build the VPS and run everything again):
-    `you@dev-machine$ cp ~/.ssh/known_hosts ~/.ssh/known_hosts.bak`
+        you@dev-machine$ cp ~/.ssh/known_hosts ~/.ssh/known_hosts.bak
 
 
-### Change the django SECRET_KEY:
+#### Step 5: Save a new django secret key
 
 1. From the command line (make sure you are in the one-click-django-server directory):
-*type a random long string instead of "foobar"*:
 
-    `you@dev-machine$ python scripts/create_secret_key.py foobar`
-    
-2. Copy the generated key, and paste it to the SECRET_KEY entry in /path/to/one-click-django-server/site_repo/settings.py
-    
+        you@dev-machine$ python scripts/create_secret_key.py foobar
+*Type a random long string instead of "foobar"*
+2. Copy the generated key, and paste it to the SECRET_KEY entry in the settings.py file. To edit the file:
+
+        you@dev-machine$ nano site_repo/settings.py
+        
+     *In the editor, find SECRET_KEY = "I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README" 
+     and replace it with SECRET_KEY = "…" (instead of "…" paste  the secret key you just generated).*
+     
+#### Step 6: Prepare server passwords
+
+During installation you will be asked to provide 4 passwords,
+so it's better to prepare them beforehand and write them down.  
+These are the required passwords during server instalaltion:
+
++ Your Linux user shell password (with sudo)
++ django Linux user shell password (no sudo)
++ MySQL root password
++ django site superuser password (for the site 'root' user)
 
 
-## Install
-** Only after prep: text was replaced, id_rsa.pub was copied, SECRET_KEY changed **
-
-* During installation you will be asked to create the following passwords (better to prepare these passwords beforehand 
-):
-- your linux user password (with sudo)
-- django user linux user (no sudo) 
-- mysql root password
-- django site superuser ('root') password.
-
+## Install server & website
 
 From the command line (make sure you are in the one-click-django-server directory):
 
 1. Tar the files:
- ```you@dev-machine$ cd ..
-    you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server```
+
+        you@dev-machine$ cd ..
+        you@dev-machine$ tar -zcf setup.tar.gz one-click-django-server
+
+1. Upload to server: 
+
+        you@dev-machine$ scp setup.tar.gz root@PUB.IP.IP.IP:~/
         
-2. Upload to server (replace PUB.IP.IP.IP with the VPS actual IP): 
-    `you@dev-machine$ scp setup.tar.gz root@PUB.IP.IP.IP:~/`
-    
-3. SSH to server:
-    `you@dev-machine$ ssh root@PUB.IP.IP.IP`
+      You will have to enter the root password you provided when you built the VPS
+      
+      *Replace PUB.IP.IP.IP with the VPS actual IP*
+      
+1. SSH to server:
+
+        you@dev-machine$ ssh root@PUB.IP.IP.IP
         
-4. Unpack ("root@li1234" will show the actual label/hostname your VPS provider sets for the new VPS) :
-    `root@li1234# tar -zxvf setup.tar.gz; chown -R root:root one-click-django-server`
+      *Replace PUB.IP.IP.IP with the VPS actual IP*
+
+1. Unpack:
+
+       root@vps-machine# tar -zxvf setup.tar.gz
+       root@vps-machine# chown -R root:root one-click-django-server
+      *The label "vps-machine" should show the actual label your VPS provider sets for the new VPS*
+
+1. Run setup (must run from the one-click-django-server directory):
+
+       root@vps-machine# cd one-click-django-server/
+       root@vps-machine# ./setup.sh
+
+    When the script runs: You will be asked to provide 4 passwords.
+         The passwords are your Linux  user shell password (with sudo), django Linux user shell password (no sudo), MySQL root password, django superuser password (the website 'root')
     
-5. Run setup:
-*during installations you will need to provide 3 passwords: your linux sudo user password, MySQL root password, django superuser ('root') password' *
-    `root@li1234# cd one-click-django-server; ./setup.sh`
+    *Note: during installation, Linux and apt-get ask you to confirm with [Y/n]. When prompted to answer yes or no, you should answer Yes to everything. 
+    The one time you can answer "n" is when mysql secure installation asks "Change the root password". If you entered a strong MySQL root password during MySQL installation, you can answer "n" here.*
     
-6. Reboot the server, then check the website with a browser!
+1. Reboot the server.
 
-7. Check SSH without password:
-```
-    you@dev-machine$ ssh PUB.IP.IP.IP
-    you@my-django-server$ echo "Hello Server"
-```
+Check the website with a browser!
+If eveything works, you should see something like [this website example](website_server.png)
 
-8. Add the django server to your local hosts file:
-    `you@dev-machine$ sudo nano /etc/hosts`
-
-9. Check: 
-    `you@dev-machine$ ssh my-django-server`
-
-10. Server packages upgrade:
-    `you@my-django-server$ sudo apt-get upgrade`
+Great! You have a website.
 
 
-## Command line aliases:
 
-1. firewall-up: loads the firewall
-2. firewall-down: clears all iptables rules, so no firewall at all. Sometimes useful for debugging
-3. site-maintenance: shutsdown apache gracefuly, waits 1 minute, and moves Nginx to a one-page static maintenance html site (maintenance file is /usr/share/nginx/html/index.html)
-4. site-up: restarts apache, and restart Nginx with the django site
-5. site-reload: touches the wsgi file, so mod-wsgi reloads the python code. Useful if only pycode changed, and there is no need to restart Apache
-6. site-auth-on: like site-up, with Apache config that protects the entire site with Apache password. The username and passowrd credentioals are in mysite/site_config/django_auth.py
-7. site-auth-off: like site-up, clears the site password configs in site-auth-on
-8. tail-logs: tails main.log, debug.log, Apache error.log
+## After the site works
 
+1. You should now have SSH to the server without a password:
 
-## Development & Deployment
-
-1. Install a similar environment on you dev machine, where the repository is cloned from the server git repository
-2. For one-click install script on an Ubuntu machine, please use the one-click-django-dev scripts. The dev environment scripts were tested on Ubuntu (there is an advantage
-to develop on the same OS you deploy to), but with few adjustments should work on other Linux based (I use VMFusion Ubuntu on a mac, also works great)
-3. Develop the app! 
-4. To import modules in python, use from site_repo. (site_repo was configured with a pth file on the python path)
-5. For javascript, css and images/media see extranl files
-6. Django development server is easier to use during development. Before pushing, it's recommended to test on Nginx/Apache Locally.
-7. Deployment is easy, it's a one server website. Just push the code, run collectstatic on the server if any js/css file changed, run migrate on server if db schema changed,
-and reload the site. If migrate is required, moving to maintenance is recommended, and then site-up. 
-
-See the one-click-django-dev Readme.
-
-Note: see django docs for deployment
-
-
-## Next Steps:
-
-1. The django project is saved in the django user home directory on the server. To access the project, ssh as django:
-    'you@dev-machine: ssh django@PUB.IP.IP.IP'
-
-2. To add site access to people, or dev machines, simply add the public ssh key to the django user authorized keys:
-    '''you@dev-machine$ scp ~/.ssh/id_rsa.pub django@PUB.IP.IP.IP:~/keyname.pub
-       you@dev-machine$ ssh django@PUB.IP.IP.IP
-       django@my-django-server$ cat keyname.pub >> .ssh/authorized_keys'''
+       you@dev-machine$ ssh PUB.IP.IP.IP
+       you@my-django-server$ echo "Hello Server"
        
-Any user that is added to the server's django user will have access to the site directories, logs, etc, and 
-will be able to pull and push code to the repo. However, without sudo.
-
-3. Staging environment: can be set in a similar way, with the same scripts, just replace the IP and the staging domain.
-You will need, however, to modify your git workflow between dev, staging, production
-        
-4. The firewall is really basic. Add some advanced and more specific rules, there are many resources on the web, books and iptables
-docs.
-
-5. If you want to save passwords, secret key etc outside the repository, use site_config directory, move them to the site_config/secrets.py
-file. 
-Note: If the secret was commited in previous versions, it is still accessible to anybody who can access the repo (e.g. on github).
-So the best solution is to use new secrets altogether, and save those secrets on site_config/secrets.py, without previous commits.
-
-
-6. Mysqldump: mysqldump can be used to save and load database backups and fixtures. For example:
-    Save backup:
-    '''you@server: mysqldump -u django -p djangomysqlpassword --databases django_db --add-drop-database > django_db.bak.sql
-    Load backup:
-    you@server: mysql -u root -p mysqlrootpassword < django_db.bak.sql'''
-
-
-
-7. Backup: Most VPS providers offer a backup (Linode does for additional fees). However, to make sure the database is in a known state,
-during backup, run a mysqldump with a crontab task a few minutes before the shceduled backup.
-
-
-## The project structure
-
-The django project suggested here is built in a specific way that already arrange for logs, static files etc.
-However, django is very flexible and everything could be easily changed.
-This is the server directory. The local dev directory is similar, under the user home dir, and with a cloned git repo from the server
-
-/home/django/
-    |
-    |- site_repo.git  (git bare repository, you push to this repo, and fetch it from the mysite/site_repo)
-    |
-    |- mysite (the project directory)
-        |
-        |- logs (site logs, not a repository))
-        |   |- debug.log (django db queries, logs when DEBUG_DB_LOG = True)
-        |   |- debug_db.log (your logging.debug("debug msg") log, logs when DEBUG_LOG = True)
-        |   |- main.log (your logging.getLogger("main").info("production msg") log, logs everything from log level info)
-        |
-        |- manage.py (the django utility for the project)
-        |
-        |- media_resources (pre-prepared site media directory, not a repository. e.g. logo, icons, etc)
-        |
-        |- media_uploads (media directory, not a repository, for user uploaded resources, e.g. avatars)
-        |
-        |- site_config (optional settings directory on the python path, but not in a repository)
-        |   |
-        |   |- settings_production.py (settings.py will try to import this file, make sure it exists in production)
-        |   |- settings_tmp.py (settings.py will try to import this file, useful for ad-hoc settings during dev)
-        |   |- site_auth.py (credentials for password-protected site via Apache auth, if used)
-        |
-        |- site_repo (this is the actual code repository for your django webapp project)
-        |   |
-        |   |- settings.py
-        |   |- urls.py 
-        |   |- wsgi.py 
-        |   etc...
-        |
-        |- static_root (static js & css files, created from the repository with manage.py collectstatic, this dir is not a repository)
- 
- 
-## Settings
-
-...
-          
+   *Replace PUB.IP.IP.IP with the VPS actual IP*
   
-## Django administration
+1. Add the django server to your local hosts file:
 
-..., change the admin url...
+       you@dev-machine$ sudo nano /etc/hosts
 
-  
-  
-## Extrnal files: JS, CSS, images  
+1. SSH with hostname:
 
-Out of the box, django seperates extrnal resources into two categories: site resources, and user uploads. Each is served from it's own url and root directory.
-However, it's often handy to have three categories, as follows:
-1. js & css scripts: These are the files that often change during development, and thus served after manage.py collectstatic. During development, they are served from the repository.
-2. Other, non js or css, pre-prepared and optimised assets: e.g. logo, icons etc. Always served from a different directory, outside the repository
-3. User uploads: e.g. avatars, another directory
+       you@dev-machine$ ssh my-django-server
+      *Replace my-django-server with the actual hostname*
+      
+      
+1. Uncomment the ip6tables firewall rules on the server:
 
-For external files expire date and browser cache see "Webservers"
-        
-### Script files (JS,CSS):
+	   you@my-django-server$ sudo nano /etc/network/interfaces
+	   you@my-django-server$ sudo nano /usr/local/bin/firewall_up.sh
+	   you@my-django-server$ sudo nano /usr/local/bin/firewall_down.sh
+       you@my-django-server$ firewall-up
+       
+	*The ip6tables rules sometimes have issues with the installaion, so these rules	 should be enabled after the server is ready*
+	   
+1. Upgrade server:
 
-1. During development, set DEBUG=True, and work on the static files in the repository, at my_site/site_repo/static. Changes you make
-to the files are reflected in site.
-2. Files will be available in 127.0.0.1:8000 in django dev server (manage.py runserver), when DEBUG=True.
-3. Refernces to the js,css files in the templates should use the "static" template tag (see base.html)
-4. In production, DEBUG=False, and files are served directly by Nginx from the STATIC_ROOT directory (mysite/static_root) with Nginx's location alias.
-5. To see changes made to static files when DEBUG=False, you must run from the mysite directory:
-    '''you@dev-or-production-machine: python manage.py collectstatic'''
-6. For testing, sometimes debugging, it's handy to use Nginx/Apache with DEBUG=True. In this case, files are served by Nginx from static_root, but with the original file name, rather than the hashed name added by collectstatic
-Summary: Edit and work on static files when DEBUG=True, once everything works, run collectstatic and test with Nginx/Apache with DEBUG=False, then deploy.
-
-Note: django development server will not serve static files when DEBUG=False
-Note: django also supports serving static files from an application's  directory, see django docs
-Note: django will pick any other static resource using the "static" url or directory. However, for non js, css, it helps to use different URL and directory, as follows.
+        you@my-django-server$ sudo apt-get upgrade
 
 
-### Non js/css pre-prepared resources:
+## What's Next?
+Great, you have a working server with a django website!    
+Now you need a local development environment:  Auto install this dev environement with one-click-django-dev.    
+Similarily to the server, the one-click-django-dev scripts will auto install (almost) everything localy, and a deploy script with simple deployment reciepes.
 
-1. Files are served from mysite/media_resources/ directory, both for runserver , or via Nginx.
-2. Copy the logo, icons (or any other non js,css resource) files to this directory. On production, to /home/django/mysite/media_resources, using the django user permissions
-example: ```you@dev-machine: scp logo.png django@PUB.IP.IP.IP:~/mysite/media_resources/```
-3. Files will be available in 127.0.0.1:8000 in django dev server when DEBUG=True
-4. Refernces to these files in templates should use {{ MEDIA_RES_URL }} (see base_home.html)
-5. Favicon is also served from this directory. The file is media_resources/favicon.ico (see base.html )
-6. In production, or production testing, the files are served by Nginx directly from the same directory. 
-7. Do not replace files with other files with same name, since browsers may still show the older files from cache
+Deploy is really easy BTW. After you install one-click-django-dev, the simplest deploy is:
 
+	you@dev-machine: fab deploy
+	
+	
+###Install development & deployment environemnt with one-click-django-dev
 
-### Uploads:
-1. Files are served from media_uploads/ directory, both for runserver , or via Nginx
-2. Uploads are configured with MEDIA_URL and MEDIA_ROOT, django's settings for uploaded files, see django docs
-3. For complete info about uploads see django docs. This project config respects django default to use MEDIA_URL and MEDIA_ROOT for uploads.
+[On a Mac OSX 10.11 El-Capitan](https://github.com/aviah/one-click-django-dev-osx-el-capitan/master/reademe.md)  
+Install dev environment, local site & deploy scripts, on OSX 10.11 El-Capitan
 
 
-## Scripts and media files deloyment:
+[On Ubunu 14.04](https://github.com/aviah/one-click-django-dev-ubuntu-14-04/master/reademe.md)   
+Install dev environment, local site & deploy scripts, on a clean slate Ubuntu 14.04 LTS. It's great for a virtual machine, so whatever your dev machine is, OSX or Windows, you can develop on the same OS of the server (I run Ubuntu guest on VMWare fusion).
 
-1. Commit and push the site_repo code
-2. Run collectstatic on the server
-3. scp images, icons etc to mysite/media_resources/
-4. Reload site
+Once you auto install the dev local site, you will have:
 
-Note: This deployment assumes one webserver, see django docs
-
-## Templates:
-
-Templates are saved in the site_repo/templates directory.
-
-Note: django also supports serving templates from an application's  directory, see django docs
+1. A production website
+2. A local website
+3. Simple deployment scripts
+4. The basic django project to further build and learn.
 
 
-## Logging:
+** After you install the local development website …**
 
-1. Logs are saved to the project logs/ directory
-2. For dev, set DEBUG_LOG=True, and use logging.debug('debug msg'), which logs to mysite/logs/debug.log, when DEBUG_LOG=True
-3. For production, use logging.getLogger('main').info('production msg'), which logs to mysite/logs/main.log when log level >= info.
-4. The debug log is configured as root log, so it can be used without getLogger, only logging.debug. 
-5. During development, it's easy to work only with debug.log, which also gets both debug and the 'main' logger,
-so everything is in one place. The debug logs said which message was logged to debug (root), and which was propagated from main.
-6. On production, just set DEBUG_LOG=False, unless debug logging is required to debug something on the server.
-7. Django can automatically log all db transactions. This feature is really handy during development, but a preformance issue on production.
-To use this logger set DEBUG_DB_LOG=True. If also DEBUG=True, the db activity is logged to mysite/logs/debug_db.log.
+The project's [Playground](https://github.com/aviah/one-click-django-docs/master/playgorund.md) let's you play and experiment a bit with the django-one-click project.
 
-Note: django provides many other loggers and options, see docs.
+If you are new to django, why not take our version to the official django polls tutorial. It implments the polls app in in this real development-deployment-production environment, with git. When you finish this tutorial, the polls app will run on the real website at www.yourdommain.com/polls.    
+Start here [Part 1: Create the Polls App](https://github.com/aviah/one-click-django-docs/master/tutorial_part1.md) 
 
+For a complete project refrence: the project layout, files, directories, settings, deployment, media files, logging, coding refrence etc, see the [Project refrence docs](https://github.com/aviah/one-click-django-docs/master/preadme_docs.md)
 
-## Cache:
+Good Luck!
+	
+To support this project with my affiliate link:| 
+-|
+https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
+	
 
-1. A simple basic file-based cache (the directory is mysite/django_cache)
-2. To use the cache: from django.core.cache import cache, and then cache.set, cache.get etc (see home/views.py)
-
-Note: django provides many other caching options, multiple caches, etc. see docs.
-
-
-## Web servers:
-
-1. Runserver: Develop and test with django development server, on 127.0.0.1:8000. When DEBUG=True, everything is served with this server.
-2. Nginx,Apache: Nginx passes the python code to the Apache (with mod_wsgi) proxy, and serves the static files, media and uploads directly
-directly.
-3. In Nginx, the static,media resoruces and uploads dirs are configured to 180d expiry. This will affect script files (css,jss), since any change is reflected with a new
-name by collectstatic. Images, however, in media resources and uploads, will be served from browser cache for this period. Changing them requires to a new file with a new name
-(so the browser do not find a cached version)
-4. During initial development, when the images change, just clear the browser cache, use a new "incognito" window, or change the 180d config in /etc/nginx/sites-enabled/django
