@@ -47,7 +47,7 @@ apt-get update
 
 # django site
 apt-get install python-pip
-pip install Django==1.8.7
+pip install Django==1.8.9
 echo ">>> Adding **django** user account(another password please)"
 echo "[Press ENTER to continue]"
 read dummy
