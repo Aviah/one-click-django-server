@@ -240,6 +240,7 @@ From the command line (make sure you are in the one-click-django-server director
 
        root@vps-machine# tar -zxvf setup.tar.gz
        root@vps-machine# chown -R root:root one-click-django-server
+       
       *The label "vps-machine" should show the actual label your VPS provider sets for the new VPS*
 
 1. Run setup (must run from the one-click-django-server directory):
