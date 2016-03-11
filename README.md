@@ -238,14 +238,15 @@ From the command line (make sure you are in the one-click-django-server director
 
 1. Unpack:
 
-       root@vps-machine# tar -zxvf setup.tar.gz
-       root@vps-machine# chown -R root:root one-click-django-server
+        root@vps-machine# tar -zxvf setup.tar.gz
+        root@vps-machine# chown -R root:root one-click-django-server
+       
       *The label "vps-machine" should show the actual label your VPS provider sets for the new VPS*
 
 1. Run setup (must run from the one-click-django-server directory):
 
-       root@vps-machine# cd one-click-django-server/
-       root@vps-machine# ./setup.sh
+        root@vps-machine# cd one-click-django-server/
+        root@vps-machine# ./setup.sh
 
     When the script runs: You will be asked to provide 4 passwords.
          The passwords are your Linux  user shell password (with sudo), django Linux user shell password (no sudo), MySQL root password, django superuser password (the website 'root')
@@ -266,33 +267,34 @@ Great! You have a website.
 
 1. You should now have SSH to the server without a password:
 
-       you@dev-machine$ ssh PUB.IP.IP.IP
-       you@my-django-server$ echo "Hello Server"
+        you@dev-machine$ ssh PUB.IP.IP.IP
+        you@my-django-server$ echo "Hello Server"
        
    *Replace PUB.IP.IP.IP with the VPS actual IP*
   
 1. Add the django server to your local hosts file:
 
-       you@dev-machine$ sudo nano /etc/hosts
+        you@dev-machine$ sudo nano /etc/hosts
 
 1. SSH with hostname:
 
-       you@dev-machine$ ssh my-django-server
+        you@dev-machine$ ssh my-django-server
+      
       *Replace my-django-server with the actual hostname*
       
       
 1. Uncomment the ip6tables firewall rules on the server:
 
-	   you@my-django-server$ sudo nano /etc/network/interfaces
-	   you@my-django-server$ sudo nano /usr/local/bin/firewall_up.sh
-	   you@my-django-server$ sudo nano /usr/local/bin/firewall_down.sh
-       you@my-django-server$ firewall-up
+	    you@my-django-server$ sudo nano /etc/network/interfaces
+	    you@my-django-server$ sudo nano /usr/local/bin/firewall_up.sh
+	    you@my-django-server$ sudo nano /usr/local/bin/firewall_down.sh
+	    you@my-django-server$ firewall-up
        
 	*The ip6tables rules sometimes have issues with the installaion, so these rules	 should be enabled after the server is ready*
 	   
 1. Upgrade server:
 
-        you@my-django-server$ sudo apt-get upgrade
+	    you@my-django-server$ sudo apt-get upgrade
 
 
 ## What's Next?
@@ -333,8 +335,7 @@ For a complete project refrence: the project layout, files, directories, setting
 
 Good Luck!
 	
-To support this project with my affiliate link:| 
--|
+Support this project with my affiliate link| 
+-------------------------------------------|
 https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
-	
 
