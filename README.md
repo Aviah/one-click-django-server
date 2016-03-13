@@ -60,7 +60,7 @@ https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
 
   
 ###Development Environment
-After the auto-install of the server, use the auto-install locally the matching development & deployment environment with one-click-django-dev.     
+After the auto-install of the server, use the one-click-django-dev to auto-install local website and the matching development & deployment environment.     
 The auto-install of a local dev environment is available for [OSX El-Capitan](https://github.com/Aviah/one-click-django-dev-osx-el-capitan) or [Ubuntu 14.04 Trusty](https://github.com/Aviah/one-click-django-dev-ubuntu-14-04-trusty) (Ubuntu on a virtual machine will do for Windows).
 
 *Note: For simplicity, it's a single server configuration. Everything is installed on one VPS. Also, no virtualenv, one domain per server, etc. Eventaully you will have to deal with more complex configurations, but this single server VPS can take you a long way.*
