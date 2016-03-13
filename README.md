@@ -267,7 +267,7 @@ From the command line (make sure you are in the `one-click-django-server` direct
 1. Reboot the server.
 
 Check the website with a browser!
-If eveything works, you should see something like [this website example](website_server.png)
+If eveything works, you should see something like [this website image](server_it_works.png)
 
 Great! You have a website.
 
