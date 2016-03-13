@@ -7,7 +7,7 @@
 [VPS for the Server](#vps-for-the-server)    
 [What's included](#whats-included)    
 [Install Prep](#install-prep)    
-[Auto Install Server & Website](#auto-install-server-website)    
+[Auto Install Server & Website](#auto-install-server--website)    
 [What's Next](#whats-next)   
 
 ## Why?
@@ -38,11 +38,11 @@ Following are the steps.
 
 ## The Polls Tutorial with Deployment
 
-If you are new to django, there is also a tutorial!   
+If you are new to django, there is also a tutorial.   
  
 It's built on the official django polls tutorial, but here you learn on this real development-production environemnt. This version of the official polls tutorial includes working with git, deployment, and basic server troubleshooting.   
 
-So you will have the polls app working on a real website, at **www.yourdomain.com/polls**!
+After running it, you will have the polls app working on a real website, at `www.yourdomain.com/polls`!
 
 ## VPS for the Server
 
@@ -52,7 +52,7 @@ Any Ubuntu VPS will do for the website. The script installs and configures a sin
 ###VPS
 Everything was tested on a Linode Ubuntu 14.04 LTS, however, any other Ubuntu VPS should work. For me Linode is great, $10 a month give you a decent VPS with full management dashboard and excellent support.      
 
-If you decide to use Linode and wish to support the this work, please consider to sign-up with my affiliate link.
+If you decide to use Linode and wish to support the this project, please consider to sign-up with my affiliate link.
  
 Support this project with my affiliate link| 
 -------------------------------------------|
@@ -60,7 +60,7 @@ https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
 
   
 ###Development Environment
-Auto-install the server, then auto-install the matching development & deployment with one-click-django-dev, avialable for [OSX El-Capitan](https://github.com/Aviah/one-click-django-dev-osx-el-capitan) or [Ubuntu 14.04 Trusty](https://github.com/Aviah/one-click-django-dev-ubuntu-14-04-trusty] (Ubuntu on a virtual machine will do for Windows).
+Auto-install the server, then auto-install the matching development & deployment with one-click-django-dev, avialable for [OSX El-Capitan](https://github.com/Aviah/one-click-django-dev-osx-el-capitan) or [Ubuntu 14.04 Trusty](https://github.com/Aviah/one-click-django-dev-ubuntu-14-04-trusty) (Ubuntu on a virtual machine will do for Windows).
 
 *Note: For simplicity, it's a single server configuration. Everything is installed on one VPS. Also, no virtualenv, one domain per server, etc. Eventaully you will have to deal with more complex configurations, but this single server VPS can take you a long way.*
 
@@ -101,7 +101,7 @@ The one-click-django project configuration includes:
 
 
 ####Isn't all this a bit fancy for a "one click"?
-Good question, but actually not. In a nutshell, all you have to do is to sign-up for a VPS, buy a domain, run a local script that updates the config files with your specific ip,domain,username etc, and then upload the files to the vps and run the server setup script.
+Good question, but actually not. In a nutshell, all you have to do is to sign-up for a VPS, buy a domain, run a local script that updates the config files with your specific ip,domain,username etc, and upload the files to the VPS. then just run the server setup script.
 
 
 
@@ -127,7 +127,7 @@ If you are using Linode:
 + Select "Rebuild", select Ubuntu 14.04 LTS, enter the root password (keep it), click "Rebuild"
 + Set the domain name server on your domain registrar account to ns1.linode.com, ns2.linode.com ... ns5.linode.com
 + In Linode, Select "DNS Manager" >> "Add a domain zone". Enter your domain, enter email, select the VPS, click "Add a master zone"
-+ Select "Remote Access" to see the VPS ip and it's gateaway IP.
++ Select "Remote Access" to see the VPS's IP and it's gateaway IP.
 
 > Support this project with my affiliate link| 
 -------------------------------------------|
@@ -180,7 +180,7 @@ Optional: "apachepasswd"  | Password for Apache auth, used when the site is pass
 	
        
        
-4. Run find_replace.sh. After you finished edit find_replace.sh, exit the editor and run the script:
+4. Run `find_replace.sh`: After you finished editing `find_replace.sh`, exit the editor and run the script:
 
         you@dev-machine$ ./find_replace.sh
        
@@ -207,7 +207,7 @@ Optional: "apachepasswd"  | Password for Apache auth, used when the site is pass
 
         you@dev-machine$ nano site_repo/settings.py
         
-In the editor, find `SECRET_KEY = "I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README" `
+   In the editor, find `SECRET_KEY = "I_AM_NOT_SECRET_PLEASE_REPLACE_ME_SEE_README" `
      and replace it with `SECRET_KEY = "…"` (instead of "…" paste  the secret key you just generated).
      
 #### Step 6: Prepare server passwords
@@ -250,14 +250,14 @@ From the command line (make sure you are in the one-click-django-server director
         root@vps-machine# tar -zxvf setup.tar.gz
         root@vps-machine# chown -R root:root one-click-django-server
        
-      *The label "vps-machine" should show the actual label your VPS provider sets for the new VPS*
+      *The label "vps-machine" should show the actual label your VPS provider set for the new VPS*
 
-1. Run setup (must run from the one-click-django-server directory):
+1. Run setup, must run from the `one-click-django-server directory`:
 
         root@vps-machine# cd one-click-django-server/
         root@vps-machine# ./setup.sh
 
-    When the script runs: You will be asked to provide 4 passwords.
+    When the script runs, you will be asked to provide 4 passwords.
          The passwords are: your Linux  user shell password (with sudo), django Linux user shell password (no sudo), MySQL root password, django superuser password (the website 'root')
     
     *Note: during installation, Linux and apt-get ask you to confirm with [Y/n]. When prompted, you should answer Yes to everything. 
@@ -292,6 +292,11 @@ Great! You have a website.
       *Replace my-django-server with the actual hostname*
       
       
+1. Upgrade server:
+
+	    you@my-django-server$ sudo apt-get upgrade
+
+
 1. Uncomment the ip6tables firewall rules on the server:
 
 	    you@my-django-server$ sudo nano /etc/network/interfaces
@@ -301,9 +306,6 @@ Great! You have a website.
        
 	*The ip6tables rules sometimes have issues with the installaion, so these rules	 should be enabled after the server is ready*
 	   
-1. Upgrade server:
-
-	    you@my-django-server$ sudo apt-get upgrade
 
 
 ## What's Next?
@@ -321,14 +323,14 @@ Deploy is really easy BTW. After you install one-click-django-dev, the simplest 
 	
 
 
-[On a Mac OSX 10.11 El-Capitan](https://github.com/aviah/one-click-django-dev-osx-el-capitan/master/reademe.md)  
+[Development on a Mac OSX 10.11 El-Capitan](https://github.com/aviah/one-click-django-dev-osx-el-capitan/master/reademe.md)  
 Install dev environment, local site & deploy scripts, on OSX 10.11 El-Capitan
 
 
-[On Ubunu 14.04](https://github.com/aviah/one-click-django-dev-ubuntu-14-04/master/reademe.md)   
+[Developmetn on Ubunu 14.04](https://github.com/aviah/one-click-django-dev-ubuntu-14-04/master/reademe.md)   
 Install dev environment, local site & deploy scripts, on a clean slate Ubuntu 14.04 LTS. 
 
-*Note:It's great for a virtual machine, so whatever your dev machine is, OSX or Windows, you can develop on the same OS of the server (I run Ubuntu guest on VMWare fusion).*
+*Note:Ubuntu iss great for a virtual machine, so whatever your dev machine is, OSX or Windows, you can develop on the same OS of the server (I run Ubuntu guest on VMWare fusion).*
 
 Once you auto install the dev local site, you will have:
 
@@ -340,7 +342,7 @@ Once you auto install the dev local site, you will have:
 
 ### Playgorund & Tutorial
 
-The project's [Playground](https://github.com/aviah/one-click-django-docs/master/playgorund.md) let's you play and experiment a bit with the django-one-click project.
+The project's [Playground](https://github.com/aviah/one-click-django-docs/blob/master/playgorund.md) let's you play and experiment a bit with the django-one-click project.
 
 If you are new to django, why not take our version to the official django polls tutorial. It implments the polls app in in this real development-deployment-production environment, with git. When you finish this tutorial, the polls app will run on the real website at `www.yourdommain.com/polls`.    
 Start here [Django Tutorial with Deployment](https://github.com/Aviah/one-click-django-polls-tutorial) 
