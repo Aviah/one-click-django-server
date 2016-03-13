@@ -60,7 +60,8 @@ https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
 
   
 ###Development Environment
-Auto-install the server, then auto-install the matching development & deployment with one-click-django-dev, avialable for [OSX El-Capitan](https://github.com/Aviah/one-click-django-dev-osx-el-capitan) or [Ubuntu 14.04 Trusty](https://github.com/Aviah/one-click-django-dev-ubuntu-14-04-trusty) (Ubuntu on a virtual machine will do for Windows).
+After the auto-install of the server, use the auto-install locally the matching development & deployment environment with one-click-django-dev.     
+The auto-install of a local dev environment is available for [OSX El-Capitan](https://github.com/Aviah/one-click-django-dev-osx-el-capitan) or [Ubuntu 14.04 Trusty](https://github.com/Aviah/one-click-django-dev-ubuntu-14-04-trusty) (Ubuntu on a virtual machine will do for Windows).
 
 *Note: For simplicity, it's a single server configuration. Everything is installed on one VPS. Also, no virtualenv, one domain per server, etc. Eventaully you will have to deal with more complex configurations, but this single server VPS can take you a long way.*
 
@@ -189,7 +190,7 @@ Optional: "apachepasswd"  | Password for Apache auth, used when the site is pass
 
 #### Step 4: Add your ssh public key
 
-1. From the command line (make sure you are in the one-click-django-server directory):
+1. From the command line (make sure you are in the `one-click-django-server` directory):
 
         you@dev-machine$ cp ~/.ssh/id_rsa.pub user/
 2. Backup known_hosts, in case you will want to re-build the VPS and run everything again on the same VPS:
@@ -199,7 +200,7 @@ Optional: "apachepasswd"  | Password for Apache auth, used when the site is pass
 
 #### Step 5: Save a new django secret key
 
-1. From the command line (make sure you are in the one-click-django-server directory):
+1. From the command line (make sure you are in the `one-click-django-server` directory):
 
         you@dev-machine$ python scripts/create_secret_key.py foobar
 *Type a random long string instead of "foobar"*
@@ -224,7 +225,7 @@ These are the required passwords during server instalaltion:
 
 ## Auto Install Server & Website
 
-From the command line (make sure you are in the one-click-django-server directory):
+From the command line (make sure you are in the `one-click-django-server` directory):
 
 1. Tar the files:
 
@@ -319,15 +320,13 @@ Similarily to the server, the one-click-django-dev scripts will auto install (al
 Deploy is really easy BTW. After you install one-click-django-dev, the simplest deploy is:
 
 	you@dev-machine: fab deploy
-	
-	
+		
 
-
-[Development on a Mac OSX 10.11 El-Capitan](https://github.com/aviah/one-click-django-dev-osx-el-capitan/master/reademe.md)  
+[Development on a Mac OSX 10.11 El-Capitan](https://github.com/aviah/one-click-django-dev-osx-el-capitan/)  
 Install dev environment, local site & deploy scripts, on OSX 10.11 El-Capitan
 
 
-[Developmetn on Ubunu 14.04](https://github.com/aviah/one-click-django-dev-ubuntu-14-04/master/reademe.md)   
+[Developmetn on Ubunu 14.04](https://github.com/aviah/one-click-django-dev-ubuntu-14-04/)   
 Install dev environment, local site & deploy scripts, on a clean slate Ubuntu 14.04 LTS. 
 
 *Note:Ubuntu iss great for a virtual machine, so whatever your dev machine is, OSX or Windows, you can develop on the same OS of the server (I run Ubuntu guest on VMWare fusion).*
