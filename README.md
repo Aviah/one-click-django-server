@@ -67,7 +67,7 @@ The auto-install of a local dev environment is available for [OSX El-Capitan](ht
 
 
 
-## Whats' Included
+## What's Included
 
 
 The one-click-django project configuration includes:
