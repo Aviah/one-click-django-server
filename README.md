@@ -346,8 +346,8 @@ The project's [Playground](https://github.com/aviah/one-click-django-docs/blob/m
 If you are new to django, why not take our version to the official django polls tutorial. It implments the polls app in in this real development-deployment-production environment, with git. When you finish this tutorial, the polls app will run on the real website at `www.yourdommain.com/polls`.    
 Start here [Django Tutorial with Deployment](https://github.com/Aviah/one-click-django-polls-tutorial) 
 
-### Complete project refrence
-The project layout, files, directories, settings, deployment, media files, logging, coding refrence etc, see the [Project reference docs](https://github.com/aviah/one-click-django-docs/)
+### Complete project reference
+The project layout, files, directories, settings, deployment, media files, logging, coding reference etc, see the [Project reference docs](https://github.com/aviah/one-click-django-docs/)
 
 Good Luck!
 	
