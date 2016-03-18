@@ -47,7 +47,7 @@ After running it, you will have the polls app working on a real website, at `www
 ## VPS for the Server
 
 ###Server
-Any Ubuntu VPS will do for the website. The script installs and configures a single-server django 1.8.7 LTS website, with MySQL, Nginx, and Apache with mod_wsgi.    
+Any Ubuntu VPS will do for the website. The script installs and configures a single-server django 1.8.9 LTS website, with MySQL, Nginx, and Apache with mod_wsgi.    
   
 ###VPS
 Everything was tested on a Linode Ubuntu 14.04 LTS, however, any other Ubuntu VPS should work. For me Linode is great, $10 a month give you a decent VPS with full management dashboard and excellent support.      
