@@ -315,7 +315,7 @@ Great! You have a website.
 
 Great, you have a working server with a django website!    
 Now you need a local development environment:  Auto install this dev environement with one-click-django-dev.    
-Similarily to the server, the one-click-django-dev scripts will auto install (almost) everything localy, and a deploy script with simple deployment reciepes.
+Similarly to the server, the one-click-django-dev scripts will auto install (almost) everything locally, and a deploy script with simple deployment reciepes.
 
 Deploy is really easy BTW. After you install one-click-django-dev, the simplest deploy is:
 
@@ -343,7 +343,7 @@ Once you auto install the dev local site, you will have:
 
 The project's [Playground](https://github.com/aviah/one-click-django-docs/blob/master/playground.md) let's you play and experiment a bit with the django-one-click project.
 
-If you are new to django, why not take our version to the official django polls tutorial. It implments the polls app in in this real development-deployment-production environment, with git. When you finish this tutorial, the polls app will run on the real website at `www.yourdommain.com/polls`.    
+If you are new to django, why not take our version to the official django polls tutorial. It implments the polls app in this real development-deployment-production environment, with git. When you finish this tutorial, the polls app will run on the real website at `www.yourdommain.com/polls`.    
 Start here [Django Tutorial with Deployment](https://github.com/Aviah/one-click-django-polls-tutorial) 
 
 ### Complete project reference
