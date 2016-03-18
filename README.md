@@ -139,7 +139,7 @@ https://www.linode.com/?r=cc1175deb6f3ad2f2cd6285f8f82cefe1f0b3f46|
 #### Step 3: Download & prepare the config files
 
 1. Download the one-click-django-server files from Github. You don't need to clone a repo,
-just the files.
+just the files. Save to `one-click-django-server` directory (omit the "master" from the directory name if necessery).
 
 2. Open a command line, and cd to the one-click-django-server directory
 
